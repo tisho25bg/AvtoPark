@@ -22,4 +22,4 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/profile/', 'ProfileController@profile');
 
-Route::get('/admin/', 'AdminController@index');
+Route::get('/admin/', ['as' => 'admin', 'uses' => 'AdminController@index']);
