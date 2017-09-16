@@ -41,6 +41,7 @@ class LoginController extends Controller
 
 	protected function authenticated(Request $request, $user)
 	{
+	    //проверка дали потребителят е администратор
 		if (Auth::user()->role->code == \App\Role::ROLE_ADMINISTRATOR)
 		{
 			return redirect()->route('admin');
