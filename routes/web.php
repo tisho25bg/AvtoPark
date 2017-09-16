@@ -22,4 +22,5 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/profile/', 'ProfileController@profile');
 
+//TODO: Трябва да се направи като resource, за да има префикс admin
 Route::get('/admin/', ['as' => 'admin', 'uses' => 'AdminController@index']);
