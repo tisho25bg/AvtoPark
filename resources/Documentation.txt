@@ -1,0 +1,20 @@
+Създаваме си базата и правим настройките в .env
+Сега ще опитам да създам всички таблици, да добавя полета в тях, и да направя миграция...
+
+Първата таблица е с ролите :
+php artisan make:migration create_roles_table --create=roles
+
+Oтиваме във файла с миграциите и добавяме полетата :
+ public function up()
+    {
+        Schema::create('roles', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('slug', 32);
+            $table->string('name', 255);
+            $table->text('permissions');
+            $table->timestamps();
+        });
+    }
+
+Продължаваме с таблиците :
+php artisan make:migration create_employees_table --create=employees
