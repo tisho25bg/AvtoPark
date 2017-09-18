@@ -77,17 +77,6 @@
 
                 </li>
 
-
-
-
-
-
-
-
-
-
-
-
                 <li>
                     <a href="table.html">
                         <i class="material-icons">content_paste</i>
@@ -129,15 +118,13 @@
     </div>
 
     <div class="main-panel">
-        @include('users.admin.layouts.navigation')
+        @include('users.manager.controls.navigation')
         @yield('content')
     </div>
-        @include('users.admin.layouts.footer')
+    @include('users.manager.controls.footer')
 
 
 </div>
-
-
 
 </body>
 

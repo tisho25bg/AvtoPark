@@ -1,44 +1,3 @@
-
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="utf-8" />
-    <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-icon.png" />
-    <link rel="icon" type="image/png" href="/img/favicon.png" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-
-    <title>Profile</title>
-
-    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
-    <meta name="viewport" content="width=device-width" />
-
-
-    <!-- Bootstrap core CSS     -->
-    <link href="/css/bootstrap.min.css" rel="stylesheet" />
-
-    <!--  Material Dashboard CSS    -->
-    <link href="/css/material-dashboard.css" rel="stylesheet"/>
-
-    <!--  CSS for Demo Purpose, don't include it in your project     -->
-    <link href="/css/demo.css" rel="stylesheet" />
-
-    <!--     Fonts and icons     -->
-    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
-    <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300|Material+Icons' rel='stylesheet' type='text/css'>
-    <style type="text/css">
-        .profile-img{
-            max-width: 75px;
-            max-height: 85px;
-            border: 5px solid #fff;
-            border-radius: 100%;
-            box-shadow: 0 2px 2px rgba(0, 0, 0, 0.3);
-        }
-    </style>
-
-</head>
-
-<body>
-
 <div class="wrapper">
     <div class="sidebar" data-color="purple" data-image="../assets/img/sidebar-1.jpg">
         <!--
@@ -49,7 +8,7 @@
 
         <div class="logo">
             <a href="http://www.creative-tim.com" class="simple-text">
-                Админ Панел
+                Контролен  Панел
             </a>
         </div>
 
@@ -57,7 +16,7 @@
             <ul class="nav">
                 <li>
                     <a href="dashboard.html">
-                        <img class="profile-img" src="https://camo.githubusercontent.com/b13329b2b190e6c3cdeea540221d1b7506b0c903/68747470733a2f2f7261772e6769746875622e636f6d2f6d696b6f6c616c7973656e6b6f2f6c656e612f6d61737465722f6c656e612e706e67">
+                        <img class="profile-img" src="C:\Users\Bate Goiko\Desktop\1660968_649293588450839_1348471609_n.jpg">
                         Лена
                     </a>
                 </li>
@@ -315,27 +274,3 @@
 </div>
 
 </div>
-
-</body>
-
-<!--   Core JS Files   -->
-<script src="../assets/js/jquery-3.1.0.min.js" type="text/javascript"></script>
-<script src="../assets/js/bootstrap.min.js" type="text/javascript"></script>
-<script src="../assets/js/material.min.js" type="text/javascript"></script>
-
-<!--  Charts Plugin -->
-<script src="../assets/js/chartist.min.js"></script>
-
-<!--  Notifications Plugin    -->
-<script src="../assets/js/bootstrap-notify.js"></script>
-
-<!--  Google Maps Plugin    -->
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
-
-<!-- Material Dashboard javascript methods -->
-<script src="../assets/js/material-dashboard.js"></script>
-
-<!-- Material Dashboard DEMO methods, don't include it in your project! -->
-<script src="../assets/js/demo.js"></script>
-
-</html>
