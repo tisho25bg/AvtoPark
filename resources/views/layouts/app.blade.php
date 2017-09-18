@@ -11,6 +11,8 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Styles -->
+     <!-- Bootstrap core CSS     -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet" />
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
