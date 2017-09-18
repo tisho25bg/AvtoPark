@@ -24,3 +24,9 @@ Route::get('/profile/', 'ProfileController@profile');
 
 //TODO: Трябва да се направи като resource, за да има префикс admin
 Route::get('/admin/', ['as' => 'admin', 'uses' => 'AdminController@index']);
+Route::get('/admin/create-user', 'AdminController@createUser');
+
+Route:: get('/customer', 'CustomerController@index');
+Route:: get('/manager', 'ManagerController@index');
+Route:: get('/driver', 'DriverController@index');
+
