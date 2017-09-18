@@ -118,10 +118,10 @@
     </div>
 
     <div class="main-panel">
-        @include('users.admin.controls.navigation')
+        @include('admin.controls.navigation')
         @yield('content')
     </div>
-    @include('users.admin.controls.footer')
+    @include('admin.controls.footer')
 
 
 </div>
