@@ -77,17 +77,6 @@
 
                 </li>
 
-
-
-
-
-
-
-
-
-
-
-
                 <li>
                     <a href="table.html">
                         <i class="material-icons">content_paste</i>
@@ -136,8 +125,6 @@
 
 
 </div>
-
-
 
 </body>
 
