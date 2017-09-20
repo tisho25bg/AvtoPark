@@ -38,4 +38,17 @@ class User extends Authenticatable
 	protected $dates = [
 		'drive_license',
 	];
+
+	public function create(\Illuminate\Http\Request $request)
+    {
+        $this->firstName = $request->firstName;
+        $this->lastName = $request->lastName;
+        $this->email = $request->email;
+        $this->password = bcrypt($request->password);
+        $this->egn = $request->egn;
+        $this->driveLicenseCategory = $request->category;
+        $this->driveLicenseExpired = $request->expired;
+        $this->role_id = $request->role_id;
+        $this->save();
+    }
 }

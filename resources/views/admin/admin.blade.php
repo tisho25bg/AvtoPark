@@ -46,6 +46,6 @@
 
 <!-- Material Dashboard javascript methods -->
 <script src="../assets/js/material-dashboard.js"></script>
-
+@yield('scripts')
 
 </html>

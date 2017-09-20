@@ -20,7 +20,7 @@
                 </a>
                 <ul class="dropdown-menu" data-color="purple" >
                     <li><a href="#">Всички потребители</a></li>
-                    <li><a href="#">Добавяне на потребител</a></li>
+                    <li><a href="{{ route('create-user') }}">Добавяне на потребител</a></li>
                 </ul>
 
             </li>
