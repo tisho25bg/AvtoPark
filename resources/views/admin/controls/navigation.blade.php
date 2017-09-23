@@ -14,7 +14,7 @@
                     <a href="#pablo" class="dropdown-toggle" data-toggle="dropdown">
                         <i class="material-icons">person</i>
                         <p class="hidden-lg hidden-md">Profile</p>
-                        Ala Bala
+                        {{Auth::user()->firstName}}
                     </a>
                     <ul class="dropdown-menu">
                         <li><i class="material-icons">person</i></li>
