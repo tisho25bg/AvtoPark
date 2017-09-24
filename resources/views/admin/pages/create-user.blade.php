@@ -87,13 +87,55 @@
 
 									<div id="MANAGER_only"  style="display: none;"  class="hiddenfield">
 										<label for="test1">Показва се само за мениджър</label>
-										<input type="text" name="test1" id="test1">
+										<div class="row">
+											<div class="col-md-5">
+												<div class="form-group label-floating">
+													<label class="control-label">E-mail</label>
+													<input type="email" class="form-control" name="email">
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="form-group label-floating">
+													<label class="control-label">Password</label>
+													<input type="password" class="form-control" name="password">
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-5">
+												<div class="form-group label-floating">
+													<label class="control-label">ЕГН</label>
+													<input type="text" class="form-control" name="egn">
+												</div>
+											</div>
+										</div>
 									</div>
 
 
 									<div id="CUSTOMER_only"  style="display: none;"  class="hiddenfield">
-										<label for="test1">Показва се само за клиент</label>
-										<input type="text" name="test1" id="test1">
+										<label for="test1">Показва се само за клиенти</label>
+										<div class="row">
+											<div class="col-md-5">
+												<div class="form-group label-floating">
+													<label class="control-label">E-mail</label>
+													<input type="email" class="form-control" name="email">
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="form-group label-floating">
+													<label class="control-label">Password</label>
+													<input type="password" class="form-control" name="password">
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-5">
+												<div class="form-group label-floating">
+													<label class="control-label">ЕГН</label>
+													<input type="text" class="form-control" name="egn">
+												</div>
+											</div>
+										</div>
 									</div>
 
 									<button type="submit" class="btn btn-primary pull-right">Create Profile</button>
