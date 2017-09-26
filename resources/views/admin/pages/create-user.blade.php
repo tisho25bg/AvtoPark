@@ -12,25 +12,85 @@
 						<div class="card-content">
 
 							<div class="card-content">
+								{{--@if ($errors->any())--}}
+									{{--<div class="alert alert-danger">--}}
+										{{--<ul>--}}
+											{{--@foreach ($errors->all() as $error)--}}
+												{{--<li>{{ $error }}</li>--}}
+											{{--@endforeach--}}
+										{{--</ul>--}}
+									{{--</div>--}}
+								{{--@endif--}}
 								<form method="POST">
 									{{ csrf_field() }}
 									<div class="row">
 											<div class="col-md-5">
-												<div class="form-group label-floating">
-													<label  class="control-label" for="name">Име</label>
-													<input type="text" class="form-control" name="firstName" id="name">
+												<div class="form-group label-floating" {{$errors->has('firstName') ? 'has-error' : ''}}>
+													<label  class="control-label" for="firstName">Име</label>
+													<input type="text" class="form-control" name="firstName" id="name" value="{{old('firstName')}}">
+
+													@if($errors->has('firstName'))
+														<span class="danger">
+														{{$errors->first('firstName')}}
+													</span>
+													@endif
 												</div>
 											</div>
 												<div class="col-md-6">
-													<div class="form-group label-floating">
-														<label class="control-label">Фамилия</label>
-														<input type="text" class="form-control" name="lastName" >
+													<div class="form-group label-floating" {{$errors->has('lastName') ? 'has-error' : ''}}>
+														<label class="control-label" for="lastName">Фамилия</label>
+														<input type="text" class="form-control" name="lastName" value="{{old('lastName')}}">
+
+														@if($errors->has('lastName'))
+															<span class="danger">
+														{{$errors->first('lastName')}}
+													</span>
+														@endif
 													</div>
 												</div>
+									</div>
+									<div class="row">
+										<div class="col-md-5">
+											<div class="form-group label-floating" {{$errors->has('email') ? 'has-error' : ''}}>
+												<label class="control-label" for="email">E-mail</label>
+												<input type="email" class="form-control" name="email" value="{{old('email')}}">
+
+												@if($errors->has('email'))
+													<span class="danger">
+														{{$errors->first('email')}}
+													</span>
+												@endif
+											</div>
 										</div>
+										<div class="col-md-6">
+											<div class="form-group label-floating" {{$errors->has('password') ? 'has-error' : ''}}>
+												<label class="control-label">Password</label>
+												<input type="password" class="form-control" name="password">
 
+												@if($errors->has('password'))
+													<span class="danger">
+														{{$errors->first('password')}}
+													</span>
+												@endif
+											</div>
+										</div>
+									</div>
 
-									<br>
+									<div class="row">
+										<div class="col-md-5">
+											<div class="form-group label-floating" {{$errors->has('egn') ? 'has-error' : ''}}>
+												<label class="control-label">ЕГН</label>
+												<input type="text" class="form-control" name="egn" value="{{old('egn')}}">
+
+												@if($errors->has('egn'))
+													<span class="danger">
+														{{$errors->first('egn')}}
+													</span>
+												@endif
+											</div>
+										</div>
+									</div>
+
 									<label for="role_id">Роля на потребител</label>
 									<select  name="role_id" id="role_id" >
 										<option value="">--Без избор--</option>
@@ -41,29 +101,6 @@
 
 									<div id="DRIVER_only" style="display: none;" class="hiddenfield">
 										<label for="test1">Показва се само за шофьора</label>
-										<div class="row">
-											<div class="col-md-5">
-												<div class="form-group label-floating">
-													<label class="control-label">E-mail</label>
-													<input type="email" class="form-control" name="email">
-												</div>
-											</div>
-											<div class="col-md-6">
-												<div class="form-group label-floating">
-													<label class="control-label">Password</label>
-													<input type="password" class="form-control" name="password">
-												</div>
-											</div>
-										</div>
-										<div class="row">
-											<div class="col-md-5">
-												<div class="form-group label-floating">
-													<label class="control-label">ЕГН</label>
-													<input type="text" class="form-control" name="egn">
-												</div>
-											</div>
-										</div>
-
 										<label for="test1">Свидетелство за правоуправление</label>
 										<div class="row">
 											<div class="col-md-5">
@@ -72,7 +109,6 @@
 													<input type="text" class="form-control" name="category">
 												</div>
 											</div>
-
 
 										<div class="row">
 											<div class="col-md-5">
@@ -87,55 +123,13 @@
 
 									<div id="MANAGER_only"  style="display: none;"  class="hiddenfield">
 										<label for="test1">Показва се само за мениджър</label>
-										<div class="row">
-											<div class="col-md-5">
-												<div class="form-group label-floating">
-													<label class="control-label">E-mail</label>
-													<input type="email" class="form-control" name="email">
-												</div>
-											</div>
-											<div class="col-md-6">
-												<div class="form-group label-floating">
-													<label class="control-label">Password</label>
-													<input type="password" class="form-control" name="password">
-												</div>
-											</div>
-										</div>
-										<div class="row">
-											<div class="col-md-5">
-												<div class="form-group label-floating">
-													<label class="control-label">ЕГН</label>
-													<input type="text" class="form-control" name="egn">
-												</div>
-											</div>
-										</div>
+
 									</div>
 
 
 									<div id="CUSTOMER_only"  style="display: none;"  class="hiddenfield">
 										<label for="test1">Показва се само за клиенти</label>
-										<div class="row">
-											<div class="col-md-5">
-												<div class="form-group label-floating">
-													<label class="control-label">E-mail</label>
-													<input type="email" class="form-control" name="email">
-												</div>
-											</div>
-											<div class="col-md-6">
-												<div class="form-group label-floating">
-													<label class="control-label">Password</label>
-													<input type="password" class="form-control" name="password">
-												</div>
-											</div>
-										</div>
-										<div class="row">
-											<div class="col-md-5">
-												<div class="form-group label-floating">
-													<label class="control-label">ЕГН</label>
-													<input type="text" class="form-control" name="egn">
-												</div>
-											</div>
-										</div>
+
 									</div>
 
 									<button type="submit" class="btn btn-primary pull-right">Create Profile</button>

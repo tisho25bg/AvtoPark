@@ -8,7 +8,7 @@
         <ul class="nav">
             <li>
                 <a href="#" >
-                    <img class="profile-img" src="https://camo.githubusercontent.com/b13329b2b190e6c3cdeea540221d1b7506b0c903/68747470733a2f2f7261772e6769746875622e636f6d2f6d696b6f6c616c7973656e6b6f2f6c656e612f6d61737465722f6c656e612e706e67">
+                    <img class="profile-img" src="https://scontent-sof1-1.xx.fbcdn.net/v/t1.0-9/10922855_1551211045151770_1862976727381693079_n.jpg?oh=46a483c1cc33abf5c7ab86e6e5f71be5&oe=5A42C558">
                     Лена
                 </a>
             </li>
