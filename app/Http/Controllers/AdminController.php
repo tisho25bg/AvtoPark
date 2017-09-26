@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Http\Requests\ShareFormRequest;
+
 
 class AdminController extends Controller
 {
@@ -20,12 +22,14 @@ class AdminController extends Controller
             ->with('roles', $roles);
     }
 
-    public function storeUser(Request $request)
+    public function storeUser(ShareFormRequest $request)
     {
+
         $user = new User();
         $user->create($request);
         return redirect()->route('admin');
     }
+
 
     public function createVehicle()
     {

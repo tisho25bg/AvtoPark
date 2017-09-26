@@ -12,42 +12,34 @@
 						<div class="card-content">
 
 							<div class="card-content">
-								{{--@if ($errors->any())--}}
-								{{--<div class="alert alert-danger">--}}
-								{{--<ul>--}}
-								{{--@foreach ($errors->all() as $error)--}}
-								{{--<li>{{ $error }}</li>--}}
-								{{--@endforeach--}}
-								{{--</ul>--}}
-								{{--</div>--}}
-								{{--@endif--}}
+
 								<form method="POST">
 									{{ csrf_field() }}
 									<div class="row">
-										<div class="col-md-5">
-											<div class="form-group label-floating" {{$errors->has('firstName') ? 'has-error' : ''}}>
-												<label  class="control-label" for="firstName">Име</label>
-												<input type="text" class="form-control" name="firstName" id="name" value="{{old('firstName')}}">
+											<div class="col-md-5">
+												<div class="form-group label-floating" {{$errors->has('firstName') ? 'has-error' : ''}}>
+													<label  class="control-label" for="firstName">Име</label>
+													<input type="text" class="form-control" name="firstName" id="name" value="{{old('firstName')}}">
 
-												@if($errors->has('firstName'))
-													<span class="danger">
+													@if($errors->has('firstName'))
+														<span class="danger">
 														{{$errors->first('firstName')}}
 													</span>
-												@endif
+													@endif
+												</div>
 											</div>
-										</div>
-										<div class="col-md-6">
-											<div class="form-group label-floating" {{$errors->has('lastName') ? 'has-error' : ''}}>
-												<label class="control-label" for="lastName">Фамилия</label>
-												<input type="text" class="form-control" name="lastName" value="{{old('lastName')}}">
+												<div class="col-md-6">
+													<div class="form-group label-floating" {{$errors->has('lastName') ? 'has-error' : ''}}>
+														<label class="control-label" for="lastName">Фамилия</label>
+														<input type="text" class="form-control" name="lastName" value="{{old('lastName')}}">
 
-												@if($errors->has('lastName'))
-													<span class="danger">
+														@if($errors->has('lastName'))
+															<span class="danger">
 														{{$errors->first('lastName')}}
 													</span>
-												@endif
-											</div>
-										</div>
+														@endif
+													</div>
+												</div>
 									</div>
 									<div class="row">
 										<div class="col-md-5">
@@ -109,13 +101,11 @@
 													<input type="text" class="form-control" name="category">
 												</div>
 											</div>
-
-											<div class="row">
-												<div class="col-md-5">
-													<div class="form-group label-floating">
-														<label class="control-label">Дата на изтичане</label>
-														<input type="date" class="form-control" name="expired">
-													</div>
+										<div class="row">
+											<div class="col-md-5">
+												<div class="form-group label-floating">
+													<label class="control-label">Дата на изтичане</label>
+													<input type="date" class="form-control" name="expired">
 												</div>
 											</div>
 										</div>

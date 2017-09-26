@@ -20,6 +20,8 @@ class User extends Authenticatable
 		'name', 'email', 'password', 'egn', 'drive_license', 'role_id',
 	];
 
+    protected $haveRole;
+
 	//връзка 1->1 с таблица roles
 	public function role()
 	{
@@ -50,5 +52,33 @@ class User extends Authenticatable
         $this->driveLicenseExpired = $request->expired;
         $this->role_id = $request->role_id;
         $this->save();
+    }
+
+
+    public function hasRole($roles)
+    {
+        $this->haveRole = $this->getUserRole();
+        // Check if the user is a root account
+        if ($this->haveRole->code == 'ADMIN') {
+            return true;
+        }
+        if (is_array($roles)) {
+            foreach ($roles as $need_role) {
+                if ($this->checkIfUserHasRole($need_role)) {
+                    return true;
+                }
+            }
+        } else {
+            return $this->checkIfUserHasRole($roles);
+        }
+        return false;
+    }
+    private function getUserRole()
+    {
+        return $this->role()->getResults();
+    }
+    private function checkIfUserHasRole($need_role)
+    {
+        return (strtolower($need_role) == strtolower($this->haveRole->code)) ? true : false;
     }
 }
