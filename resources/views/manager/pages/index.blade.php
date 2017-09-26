@@ -1,4 +1,4 @@
-@extends('admin.admin')
+@extends('manager.manager')
 @section('content')
 <div class="container">
 	<br>
