@@ -32,6 +32,9 @@
     @include('driver.controls.side-bar')
     <div class="main-panel">
         @include('driver.controls.navigation')
+        @if (session('alert-error'))
+            <div style="background-color: red; color:white; font-size: 18px">{{ session('alert-error') }}</div>
+        @endif
         @yield('content')
     </div>
 
