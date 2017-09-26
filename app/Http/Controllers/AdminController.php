@@ -26,4 +26,14 @@ class AdminController extends Controller
         $user->create($request);
         return redirect()->route('admin');
     }
+
+    public function createVehicle()
+    {
+
+    }
+
+    public function storeVehicle()
+    {
+
+    }
 }

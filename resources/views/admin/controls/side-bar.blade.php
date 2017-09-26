@@ -22,7 +22,19 @@
                     <li><a href="#">Всички потребители</a></li>
                     <li><a href="{{ route('create-user') }}">Добавяне на потребител</a></li>
                 </ul>
+            </li>
 
+
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <i class="material-icons">directions_car</i>
+                    <p class="active">Автопарк</p>
+                </a>
+
+                <ul class="dropdown-menu" data-color="purple" >
+                    <li><a href="#">Всички коли</a></li>
+                    <li><a href="{{ route('create-user') }}">Добавяне на превозно средство</a></li>
+                </ul>
             </li>
         </ul>
     </div>
