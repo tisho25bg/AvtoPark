@@ -21,19 +21,39 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+
         switch (\Auth::user()->role->code)
         {
             case \App\Role::ROLE_ADMINISTRATOR:
+                if($request->session()->get('alert-error')){
+                    $request->session()->flash('alert-error', $request->session()->get('alert-error'));
+                }
                 return redirect()->route('admin');
             case \App\Role::ROLE_MANAGER:
+
+                if($request->session()->get('alert-error')){
+                    $request->session()->flash('alert-error', $request->session()->get('alert-error'));
+                }
                 return redirect()->route('manager');
             case \App\Role::ROLE_CUSTOMER:
+
+                if($request->session()->get('alert-error')){
+                    $request->session()->flash('alert-error', $request->session()->get('alert-error'));
+                }
                 return redirect()->route('customer');
             case \App\Role::ROLE_DRIVER:
+
+                if($request->session()->get('alert-error')){
+                    $request->session()->flash('alert-error', $request->session()->get('alert-error'));
+                }
                 return redirect()->route('driver');
             default:
+
+                if($request->session()->get('alert-error')){
+                    $request->session()->flash('alert-error', $request->session()->get('alert-error'));
+                }
                 return redirect()->route('logout');
         }
     }

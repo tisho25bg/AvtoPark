@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 
+use App\Vehicles;
 use Illuminate\Http\Request;
 use App\User;
 use App\Http\Requests\ShareFormRequest;
-
+use App\Http\Requests\VehicleFormRequest;
 
 class AdminController extends Controller
 {
@@ -33,11 +34,17 @@ class AdminController extends Controller
 
     public function createVehicle()
     {
-
+        $vehicleTypes   = \App\Vehicle_types::get();
+        $vehicleStatuses = \App\Status::get();
+        return view('admin.pages.create-vehicle')
+            ->with('vehicleTypes', $vehicleTypes)
+            ->with('vehicleStatuses', $vehicleStatuses);
     }
 
-    public function storeVehicle()
+    public function storeVehicle(VehicleFormRequest $request)
     {
-
+        $vehicle = new Vehicles();
+        $vehicle->create($request);
+        return redirect()->route('admin')->with('success', 'Успешно добавихте превозното средство!');
     }
 }

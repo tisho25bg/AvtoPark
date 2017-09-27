@@ -27,6 +27,7 @@ Route::get('/customer/', ['as' => 'customer', 'uses' => 'CustomerController@inde
 
 
 
+
 Route::group(['middleware' => ['auth', 'roles'], 'prefix' => 'admin'], function ()
 {
     Route::get('/', [
@@ -45,11 +46,21 @@ Route::group(['middleware' => ['auth', 'roles'], 'prefix' => 'admin'], function 
         'as'    =>  'create-user',
         'uses'  =>  'AdminController@storeUser',
         'roles' =>  'admin',
-        ]);
+    ]);
 
+    Route::get('/create-vehicle', [
+        'as'    => 'create-vehicle',
+        'uses'  => 'AdminController@createVehicle',
+        'roles' => ['admin'],
+    ] );
+
+    Route::post('/create-vehicle', [
+        'as'    =>  'create-vehicle',
+        'uses'  =>  'AdminController@storeVehicle',
+        'roles' =>  'admin',
+    ]);
 }
 );
-
 Route::group(['middleware' => ['auth', 'roles'], 'prefix' => 'manager'], function ()
 {
     Route::get('/', [

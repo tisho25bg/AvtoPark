@@ -10,9 +10,7 @@
 							<p class="category">Тук е форма за създаване на нов потребител</p>
 						</div>
 						<div class="card-content">
-
 							<div class="card-content">
-
 								<form method="POST">
 									{{ csrf_field() }}
 									<div class="row">
@@ -28,19 +26,21 @@
 													@endif
 												</div>
 											</div>
-												<div class="col-md-6">
-													<div class="form-group label-floating" {{$errors->has('lastName') ? 'has-error' : ''}}>
-														<label class="control-label" for="lastName">Фамилия</label>
-														<input type="text" class="form-control" name="lastName" value="{{old('lastName')}}">
 
-														@if($errors->has('lastName'))
-															<span class="danger">
-														{{$errors->first('lastName')}}
-													</span>
-														@endif
-													</div>
+											<div class="col-md-6">
+												<div class="form-group label-floating" {{$errors->has('lastName') ? 'has-error' : ''}}>
+													<label class="control-label" for="lastName">Фамилия</label>
+													<input type="text" class="form-control" name="lastName" value="{{old('lastName')}}">
+
+													@if($errors->has('lastName'))
+														<span class="danger">
+													{{$errors->first('lastName')}}
+												</span>
+													@endif
 												</div>
+											</div>
 									</div>
+
 									<div class="row">
 										<div class="col-md-5">
 											<div class="form-group label-floating" {{$errors->has('email') ? 'has-error' : ''}}>
@@ -54,6 +54,7 @@
 												@endif
 											</div>
 										</div>
+
 										<div class="col-md-6">
 											<div class="form-group label-floating" {{$errors->has('password') ? 'has-error' : ''}}>
 												<label class="control-label">Password</label>
@@ -110,7 +111,7 @@
 											</div>
 										</div>
 									</div>
-
+									</div>
 									<div id="MANAGER_only"  style="display: none;"  class="hiddenfield">
 										<label for="test1">Показва се само за мениджър</label>
 

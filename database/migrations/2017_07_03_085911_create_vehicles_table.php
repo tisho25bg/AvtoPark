@@ -38,5 +38,6 @@ class CreateVehiclesTable extends Migration
     public function down()
     {
         Schema::dropIfExists('vehicles');
+        Schema::dropColumn('fuelConsumptionCharged');
     }
 }
