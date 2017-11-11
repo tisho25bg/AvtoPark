@@ -11,11 +11,11 @@ class Vehicles extends Model
     protected $primaryKey = 'id';
 
     public function status(){
-        return $this->hasOne('App\Status', 'id', 'status_id');
+        return $this->hasOne('App\Status', 'id', 'vehicle_status_id');
     }
 
     public function vehicle_types(){
-        return $this->hasOne('App\Vehicle_types', 'id', 'status_id');
+        return $this->hasOne('App\Vehicle_types', 'id', 'vehicle_types_id');
     }
 
     public function create(\Illuminate\Http\Request $request)

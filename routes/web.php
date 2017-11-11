@@ -19,7 +19,6 @@ Route::get('/', 'HomeController@index')->name('dashboard');
 
 Route::get('/profile/', 'ProfileController@profile');
 
-
 Route::group(['middleware' => ['auth', 'roles'], 'prefix' => 'admin'], function ()
 {
 	Route::get('/', [
@@ -57,17 +56,39 @@ Route::group(['middleware' => ['auth', 'roles'], 'prefix' => 'admin'], function 
 		'uses'	 => 'AdminController@storeVehicle',
 		'roles'	 => 'admin',
 	]);
-}
-);
+});
 Route::group(['middleware' => ['auth', 'roles'], 'prefix' => 'manager'], function ()
 {
-	Route::get('/', [
-		'as'	 => 'manager',
-		'uses'	 => 'ManagerController@index',
-		'roles'	 => ['manager'],
-	]);
-}
-);
+    Route::get('/', [
+        'as'    => 'manager',
+        'uses'  => 'ManagerController@index',
+        'roles' => ['manager', 'admin'],
+    ]);
+
+    Route::get('/create-vehicle', [
+        'as'    => 'create-vehicle',
+        'uses'  => 'ManagerController@createVehicle',
+        'roles' => ['admin', 'manager'],
+    ] );
+
+    Route::post('/create-vehicle', [
+        'as'    =>  'create-vehicle',
+        'uses'  =>  'ManagerController@storeVehicle',
+        'roles' =>  ['admin','manager'],
+    ]);
+
+    Route::get('/show-vehicles', [
+        'as'    =>  'show-vehicles',
+        'uses'  =>  'ManagerController@showVehicles',
+        'roles' =>  ['admin', 'manager']
+    ]);
+
+    Route::get('/maps', [
+        'as'    =>  'maps',
+        'uses'  =>  'ManagerController@maps',
+        'roles' =>  ['admin', 'manager']
+    ]);
+});
 
 Route::group(['middleware' => ['auth', 'roles'], 'prefix' => 'customer'], function ()
 {
@@ -76,8 +97,7 @@ Route::group(['middleware' => ['auth', 'roles'], 'prefix' => 'customer'], functi
 		'uses'	 => 'CustomerController@index',
 		'roles'	 => ['customer'],
 	]);
-}
-);
+});
 
 Route::group(['middleware' => ['auth', 'roles'], 'prefix' => 'driver'], function ()
 {
@@ -86,5 +106,4 @@ Route::group(['middleware' => ['auth', 'roles'], 'prefix' => 'driver'], function
 		'uses'	 => 'DriverController@index',
 		'roles'	 => ['driver'],
 	]);
-}
-);
+});

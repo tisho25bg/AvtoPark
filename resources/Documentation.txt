@@ -18,3 +18,10 @@ Oтиваме във файла с миграциите и добавяме по
 
 Продължаваме с таблиците :
 php artisan make:migration create_employees_table --create=employees
+
+Източници :
+    за ценообразуване -
+    https://www.kamioni.bg/bg/menu/10/post/650/KAK-cENOOBRAZUVAT-PREVOZVAChITE?page=
+
+    за цени на прегледи и граждански отговорности -
+    http://iandgbrokers.com/calculator-grajdanska/compare/%D0%B3%D1%80%D0%B0

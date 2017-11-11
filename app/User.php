@@ -8,7 +8,7 @@ use Illuminate\Notifications\Notifiable;
 class User extends Authenticatable
 {
 
-	use Notifiable; //?????
+	use Notifiable;
 
 	protected $primaryKey = 'id';
 
@@ -88,4 +88,8 @@ class User extends Authenticatable
 		return (strtolower($need_role) == strtolower($this->haveRole->code)) ? true : false;
 	}
 
+    public function getFullNameAttribute()
+    {
+        return ucfirst($this->firstName) . ' ' . ucfirst($this->lastName);
+    }
 }
