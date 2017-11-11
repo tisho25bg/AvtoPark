@@ -6,7 +6,7 @@
 				<div class="col-md-8">
 					<div class="card">
 						<div class="card-header" data-background-color="purple">
-							<h4 class="title">Create User</h4>
+							<h4 class="title">Създаване на потребител</h4>
 							<p class="category">Тук е форма за създаване на нов потребител</p>
 						</div>
 						<div class="card-content">

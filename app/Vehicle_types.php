@@ -14,6 +14,6 @@ class Vehicle_types extends Model
     protected $primaryKey = 'id';
 
     public function vehicles(){
-        return $this->hasMany('App\Vehicles', 'status_id', 'id');
+        return $this->hasMany('App\Vehicles', 'vehicle_types_id', 'id');
     }
 }

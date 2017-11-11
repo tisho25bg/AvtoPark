@@ -1,4 +1,4 @@
-@extends('admin.admin')
+@extends('manager.manager')
 @section('content')
     <div class="content">
         <div class="container-fluid">
@@ -6,7 +6,7 @@
                 <div class="col-md-8">
                     <div class="card">
                         <div class="card-header" data-background-color="purple">
-                            <h4 class="title">Create Vehicle</h4>
+                            <h4 class="title">Добавяне на превозно средство</h4>
                             <p class="category">Тук е форма за създаване на нов превозни средства</p>
                         </div>
                         <div class="card-content">
@@ -150,7 +150,7 @@
 
                                      <br>
 
-                                    <button type="submit" class="btn btn-primary pull-right">Create vehicle</button>
+                                    <button type="submit" class="btn btn-primary pull-right">Добави</button>
                                     <div class="clearfix"></div>
                                 </form>
                             </div>

@@ -8,23 +8,38 @@
     <div class="sidebar-wrapper" data-color="purple" >
         <ul class="nav">
             <li>
-                <a href="#" >
-                    <img class="profile-img" src="https://scontent-sof1-1.xx.fbcdn.net/v/t1.0-9/21618013_1846654168696341_6177217922365790204_n.jpg?oh=5f82119bf4ba21b251d5d311fe0c3df9&oe=5A46FD0E">
+                <a href="{{route('manager')}}" >
                     {{Auth::user()->firstName}}
                 </a>
             </li>
+
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                    <i class="material-icons">person</i>
-
-                    <p class="active">Потребители</p>
+                    <i class="material-icons">directions_car</i>
+                    <p class="active">Автопарк</p>
                 </a>
-                <ul class="dropdown-menu" data-color="purple" >
-                    <li><a href="#">Всички потребители</a></li>
-                    <li><a href="{{ route('create-user') }}">Добавяне на потребител</a></li>
-                </ul>
 
+                <ul class="dropdown-menu" data-color="purple" >
+                    <li><a href="{{ route('show-vehicles') }}">Всички коли</a></li>
+                    <li><a href="{{ route('create-vehicle') }}">Добавяне на превозно средство</a></li>
+                </ul>
             </li>
+
+            <li>
+                <a href="{{route('maps')}}">
+                    <i class="material-icons">place</i>
+                    <p class="active">Карти</p>
+                </a>
+            </li>
+
+            @if(Auth::user()->hasRole('ADMIN'))
+                <li>
+                    <a href="{{route('admin')}}" >
+                        <i class="material-icons">reply</i>
+                       Admin panel
+                    </a>
+                </li>
+            @endif
         </ul>
     </div>
 </div>

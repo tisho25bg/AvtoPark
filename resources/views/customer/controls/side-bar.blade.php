@@ -7,22 +7,19 @@
     <div class="sidebar-wrapper" data-color="purple" >
         <ul class="nav">
             <li>
-                <a href="#" >
-                    <img class="profile-img" src="http://afera.bg/wp-content/uploads/2016/05/TIKVA5678.jpg">
+                <a href="{{route('customer')}}" >
                     {{Auth::user()->firstName}}
                 </a>
             </li>
             <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                    <i class="material-icons">person</i>
-
-                    <p class="active">Потребители</p>
-                </a>
-                <ul class="dropdown-menu" data-color="purple" >
-                    <li><a href="#">Всички потребители</a></li>
-                    <li><a href="{{ route('create-user') }}">Добавяне на потребител</a></li>
-                </ul>
-
+            @if(Auth::user()->hasRole('ADMIN'))
+                <li>
+                    <a href="{{route('admin')}}" >
+                        <i class="material-icons">reply</i>
+                        Admin panel
+                    </a>
+                </li>
+                @endif
             </li>
         </ul>
     </div>
