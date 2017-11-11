@@ -18,16 +18,16 @@
                     <p class="active">Потребители</p>
                 </a>
                 <ul class="dropdown-menu" data-color="purple" >
-                    <li><a href="{{ route('show-users') }}">Всички потребители</a></li>
+                    <li><a href="{{ route('users') }}">Всички потребители</a></li>
                     <li><a href="{{ route('create-user') }}">Добавяне на потребител</a></li>
                 </ul>
             </li>
-             <li class="dropdown">
-                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                     <i class="material-icons">sort</i>
-                     <p class="active">Услуги</p>
-                 </a>
-             </li>
+			<li class="dropdown">
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+					<i class="material-icons">sort</i>
+					<p class="active">Услуги</p>
+				</a>
+			</li>
             <li>
 
                 <a href="{{route('manager')}}" >

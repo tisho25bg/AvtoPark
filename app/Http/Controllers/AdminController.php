@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Vehicles;
 use App\User;
 use App\Http\Requests\ShareFormRequest;
-use App\Http\Requests\VehicleFormRequest;
 
 class AdminController extends Controller
 {
@@ -36,20 +34,37 @@ class AdminController extends Controller
 		return redirect()->route('users');
 	}
 
-	public function createVehicle()
+	public function deleteUser($id)
 	{
-		$vehicleTypes	 = \App\Vehicle_types::get();
-		$vehicleStatuses = \App\Status::get();
-		return view('admin.pages.create-vehicle')
-				->with('vehicleTypes', $vehicleTypes)
-				->with('vehicleStatuses', $vehicleStatuses);
+		User::find($id)->delete();
+		return redirect()->route('users');
 	}
 
-	public function storeVehicle(VehicleFormRequest $request)
+	public function editUser($id)
 	{
-		$vehicle = new Vehicles();
-		$vehicle->create($request);
-		return redirect()->route('admin')->with('success', 'Успешно добавихте превозното средство!');
+		$user	 = User::find($id);
+		$roles	 = \App\Role::all();
+		return view('admin.pages.edit-user')
+				->with('user', $user)
+				->with('roles', $roles);
+	}
+
+	public function saveUser($id, ShareFormRequest $request)
+	{
+		$user = User::find($id);
+		foreach ($request->all() as $k => $v)
+		{
+			if (isset($user->$k))
+			{
+				$user->$k = $v;
+			}
+		}
+		$user->save();
+
+		$roles = \App\Role::all();
+		return view('admin.pages.edit-user')
+				->with('user', $user)
+				->with('roles', $roles);
 	}
 
 }

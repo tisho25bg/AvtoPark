@@ -21,8 +21,6 @@
 										<th>Имейл</th>
 										<th>ЕГН</th>
 										<th>Роля</th>
-										<th>Категория на книжката</th>
-										<th>Дата на изтичане на книжката</th>
 										<th class="disabled-sorting text-right">Действия</th>
 									</tr>
 								</thead>
@@ -33,8 +31,6 @@
 										<th>Имейл</th>
 										<th>ЕГН</th>
 										<th>Роля</th>
-										<th>Категория на книжката</th>
-										<th>Дата на изтичане на книжката</th>
 										<th class="disabled-sorting text-right">Действия</th>
 									</tr>
 								</tfoot>
@@ -46,11 +42,9 @@
 										<td>{{$user->email}}</td>
 										<td>{{$user->egn}}</td>
 										<td>{{$user->role->name}}</td>
-										<td>{{$user->driveLicenseCategory}}</td>
-										<td>{{$user->driveLicenseExpired}}</td>
 										<td class="text-right">
-											<a title="Редактиране" href="#" class="btn btn-simple btn-warning btn-icon edit"><i class="material-icons">dvr</i></a>
-											<a title="Изтриване" href="#" class="btn btn-simple btn-danger btn-icon remove"><i class="material-icons">close</i></a>
+											<a title="Редактиране" data-user="{{$user->id}}"  href="#" class="btn btn-simple btn-warning btn-icon edit"><i class="material-icons">dvr</i></a>
+											<a title="Изтриване" data-user="{{$user->id}}" href="javascript:;" class="btn btn-simple btn-danger btn-icon remove"><i class="material-icons">close</i></a>
 										</td>
 									</tr>
 									@endforeach
@@ -70,6 +64,7 @@
 </div>
 @endsection
 @section('scripts')
+@parent();
 <script>
 	$(document).ready(function () {
 		$('#datatables').DataTable({
@@ -80,8 +75,28 @@
 			],
 			responsive: true,
 			language: {
-				search: "_INPUT_",
-				searchPlaceholder: "Search records",
+				"decimal": "",
+				"emptyTable": "Няма информация за показване",
+				"info": "От _START_ до _END_ от общо _TOTAL_ записа",
+				"infoEmpty": "",
+				"infoFiltered": "(филтрирано от общо _MAX_ записа)",
+				"infoPostFix": "",
+				"thousands": ",",
+				"lengthMenu": "Покажи _MENU_ записа",
+				"loadingRecords": "Зареждане...",
+				"processing": "Обработка...",
+				"search": "Търсене:",
+				"zeroRecords": "Няма съвпадения",
+				"paginate": {
+					"first": "Първа",
+					"last": "Последна",
+					"next": "следваща",
+					"previous": "предишна"
+				},
+				"aria": {
+					"sortAscending": ": сортиране низходящо",
+					"sortDescending": ": сортиране възходящо"
+				}
 			}
 
 		});
@@ -89,20 +104,18 @@
 
 		var table = $('#datatables').DataTable();
 
-		// Edit record
-		table.on('click', '.edit', function () {
-			$tr = $(this).closest('tr');
-
-			var data = table.row($tr).data();
-			alert('You press on Row: ' + data[0] + ' ' + data[1] + ' ' + data[2] + '\'s row.');
+		$('.remove').on('click', function () {
+			if (confirm('Сигурни ли сте?')) {
+				var userId = $(this).data('user');
+				window.location = "/admin/delete-user/" + userId;
+			}
 		});
 
-		// Delete a record
-		table.on('click', '.remove', function (e) {
-			$tr = $(this).closest('tr');
-			table.row($tr).remove().draw();
-			e.preventDefault();
+		$('.edit').on('click', function () {
+			var userId = $(this).data('user');
+			window.location = "/admin/edit-user/" + userId;
 		});
+
 	});
 </script>
 @endsection

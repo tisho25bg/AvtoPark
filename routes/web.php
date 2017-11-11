@@ -37,7 +37,7 @@ Route::group(['middleware' => ['auth', 'roles'], 'prefix' => 'admin'], function 
 		'as'	 => 'create-user',
 		'uses'	 => 'AdminController@createUser',
 		'roles'	 => ['admin'],
-	])->name('create-user');
+	]);
 
 	Route::post('/create-user', [
 		'as'	 => 'create-user',
@@ -45,49 +45,54 @@ Route::group(['middleware' => ['auth', 'roles'], 'prefix' => 'admin'], function 
 		'roles'	 => 'admin',
 	]);
 
-	Route::get('/create-vehicle', [
-		'as'	 => 'create-vehicle',
-		'uses'	 => 'AdminController@createVehicle',
+	Route::get('/delete-user/{id}', [
+		'as'	 => 'delete-user',
+		'uses'	 => 'AdminController@deleteUser',
 		'roles'	 => ['admin'],
 	]);
 
-	Route::post('/create-vehicle', [
-		'as'	 => 'create-vehicle',
-		'uses'	 => 'AdminController@storeVehicle',
+	Route::get('/edit-user/{id}', [
+		'as'	 => 'edit-user',
+		'uses'	 => 'AdminController@editUser',
+		'roles'	 => 'admin',
+	]);
+	Route::post('/edit-user/{id}', [
+		'as'	 => 'edit-user',
+		'uses'	 => 'AdminController@saveUser',
 		'roles'	 => 'admin',
 	]);
 });
 Route::group(['middleware' => ['auth', 'roles'], 'prefix' => 'manager'], function ()
 {
-    Route::get('/', [
-        'as'    => 'manager',
-        'uses'  => 'ManagerController@index',
-        'roles' => ['manager', 'admin'],
-    ]);
+	Route::get('/', [
+		'as'	 => 'manager',
+		'uses'	 => 'ManagerController@index',
+		'roles'	 => ['manager', 'admin'],
+	]);
 
-    Route::get('/create-vehicle', [
-        'as'    => 'create-vehicle',
-        'uses'  => 'ManagerController@createVehicle',
-        'roles' => ['admin', 'manager'],
-    ] );
+	Route::get('/create-vehicle', [
+		'as'	 => 'create-vehicle',
+		'uses'	 => 'ManagerController@createVehicle',
+		'roles'	 => ['admin', 'manager'],
+	]);
 
-    Route::post('/create-vehicle', [
-        'as'    =>  'create-vehicle',
-        'uses'  =>  'ManagerController@storeVehicle',
-        'roles' =>  ['admin','manager'],
-    ]);
+	Route::post('/create-vehicle', [
+		'as'	 => 'create-vehicle',
+		'uses'	 => 'ManagerController@storeVehicle',
+		'roles'	 => ['admin', 'manager'],
+	]);
 
-    Route::get('/show-vehicles', [
-        'as'    =>  'show-vehicles',
-        'uses'  =>  'ManagerController@showVehicles',
-        'roles' =>  ['admin', 'manager']
-    ]);
+	Route::get('/show-vehicles', [
+		'as'	 => 'show-vehicles',
+		'uses'	 => 'ManagerController@showVehicles',
+		'roles'	 => ['admin', 'manager']
+	]);
 
-    Route::get('/maps', [
-        'as'    =>  'maps',
-        'uses'  =>  'ManagerController@maps',
-        'roles' =>  ['admin', 'manager']
-    ]);
+	Route::get('/maps', [
+		'as'	 => 'maps',
+		'uses'	 => 'ManagerController@maps',
+		'roles'	 => ['admin', 'manager']
+	]);
 });
 
 Route::group(['middleware' => ['auth', 'roles'], 'prefix' => 'customer'], function ()

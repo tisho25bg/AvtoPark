@@ -27,7 +27,7 @@ class ShareFormRequest extends FormRequest
 		return [
 			'firstName'	 => 'required',
 			'lastName'	 => 'required',
-			'email'		 => 'required|email|unique:users',
+			'email'		 => 'required|email|unique:users,email,' . $this->get('usrd'),
 			'password'	 => 'min:5',
 			'egn'		 => 'numeric|digits:10',
 			'role_id'	 => 'required'
