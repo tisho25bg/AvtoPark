@@ -1,7 +1,28 @@
- .profile-img{
+.profile-img{
     max-width: 75px;
     max-height: 85px;
     border: 5px solid #fff;
     border-radius: 100%;
     box-shadow: 0 2px 2px rgba(0, 0, 0, 0.3);
+}
+.danger{
+	display: block;
+    background-color: #f44336;
+    border-radius: 10px;
+    color: white;
+    padding: 0px 10px;
+}
+.sidebar .logo{
+	text-align:center;
+}
+.form-group{
+	margin-top: 27px;
+	padding-bottom: 7px;
+}
+.form-group .form-control{
+	margin-bottom: 5px;
+}
+.btn-group, .btn-group-vertical{
+	margin-bottom: 0px;
+	margin-top: 20px;
 }

@@ -6,55 +6,42 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index(Request $request)
-    {
+	/**
+	 * Create a new controller instance.
+	 *
+	 * @return void
+	 */
+	public function __construct()
+	{
+		$this->middleware('auth');
+	}
 
-        switch (\Auth::user()->role->code)
-        {
-            case \App\Role::ROLE_ADMINISTRATOR:
-                if($request->session()->get('alert-error')){
-                    $request->session()->flash('alert-error', $request->session()->get('alert-error'));
-                }
-                return redirect()->route('admin');
-            case \App\Role::ROLE_MANAGER:
+	/**
+	 * Show the application dashboard.
+	 *
+	 * @return \Illuminate\Http\Response
+	 */
+	public function index(Request $request)
+	{
 
-                if($request->session()->get('alert-error')){
-                    $request->session()->flash('alert-error', $request->session()->get('alert-error'));
-                }
-                return redirect()->route('manager');
-            case \App\Role::ROLE_CUSTOMER:
+		if ($request->session()->get('alert-error'))
+		{
+			$request->session()->flash('alert-error', $request->session()->get('alert-error'));
+		}
+		switch (\Auth::user()->role->code)
+		{
+			case \App\Role::ROLE_ADMINISTRATOR:
+				return redirect()->route('admin');
+			case \App\Role::ROLE_MANAGER:
+				return redirect()->route('manager');
+			case \App\Role::ROLE_CUSTOMER:
+				return redirect()->route('customer');
+			case \App\Role::ROLE_DRIVER:
+				return redirect()->route('driver');
+			default:
+				return redirect()->route('logout');
+		}
+	}
 
-                if($request->session()->get('alert-error')){
-                    $request->session()->flash('alert-error', $request->session()->get('alert-error'));
-                }
-                return redirect()->route('customer');
-            case \App\Role::ROLE_DRIVER:
-
-                if($request->session()->get('alert-error')){
-                    $request->session()->flash('alert-error', $request->session()->get('alert-error'));
-                }
-                return redirect()->route('driver');
-            default:
-
-                if($request->session()->get('alert-error')){
-                    $request->session()->flash('alert-error', $request->session()->get('alert-error'));
-                }
-                return redirect()->route('logout');
-        }
-    }
 }
