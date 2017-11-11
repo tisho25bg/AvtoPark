@@ -28,6 +28,12 @@ Route::group(['middleware' => ['auth', 'roles'], 'prefix' => 'admin'], function 
 		'roles'	 => ['admin'],
 	]);
 
+	Route::get('/users', [
+		'as'	 => 'users',
+		'uses'	 => 'AdminController@users',
+		'roles'	 => ['admin'],
+	]);
+
 	Route::get('/create-user', [
 		'as'	 => 'create-user',
 		'uses'	 => 'AdminController@createUser',

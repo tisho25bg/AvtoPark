@@ -15,6 +15,11 @@ class AdminController extends Controller
 		return view('admin.pages.index');
 	}
 
+	public function users()
+	{
+		return view('admin.pages.users');
+	}
+
 	public function createUser()
 	{
 		$roles = \App\Role::where('code', '!=', \App\Role::ROLE_ADMINISTRATOR)->get();
@@ -27,7 +32,7 @@ class AdminController extends Controller
 
 		$user = new User();
 		$user->store($request);
-		return redirect()->route('admin');
+		return redirect()->route('users');
 	}
 
 	public function createVehicle()
