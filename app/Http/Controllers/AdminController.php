@@ -17,7 +17,8 @@ class AdminController extends Controller
 
 	public function users()
 	{
-		return view('admin.pages.users');
+		$users = User::all();
+		return view('admin.pages.users')->with('users', $users);
 	}
 
 	public function createUser()
