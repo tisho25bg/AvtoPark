@@ -1,6 +1,6 @@
 <div class="sidebar" data-color="purple" data-image="{{url('/img/sidebar-1.jpg')}}">
     <div class="logo">
-        <a href="http://www.creative-tim.com" class="simple-text">
+        <a href="{{ route('customer') }}" class="simple-text">
             Kлиент
         </a>
     </div>
