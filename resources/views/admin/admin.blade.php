@@ -42,6 +42,7 @@
 	<!--   Core JS Files   -->
 	<script src="/assets/js/jquery-3.1.0.min.js" type="text/javascript"></script>
 	<script src="/assets/js/bootstrap.min.js" type="text/javascript"></script>
+	<script src="/assets/js/bootstrap-notify.js" type="text/javascript"></script>
 	<script src="/assets/js/jquery.datatables.js" type="text/javascript"></script>
 	<script src="/assets/js/jquery.select-bootstrap.js" type="text/javascript"></script>
 	<script src="/assets/js/material.min.js" type="text/javascript"></script>
@@ -49,5 +50,32 @@
 	<!-- Material Dashboard javascript methods -->
 	<script src="/assets/js/material-dashboard.js"></script>
 	@yield('scripts')
+	<script>
+		function showNotification(message, type) {
+		$.notify({
+		icon: "notifications",
+				message: message
 
+				}, {
+		type: type,
+				timer: 2000,
+				placement: {
+				from: 'top',
+						align: 'right'
+				}
+		});
+				}
+		$().ready(function () {
+		@if (session('alert-success'))
+				showNotification('{{ session("alert-success") }}', 'success');
+				@endif
+
+				@if (session('alert-error'))
+				showNotification('{{ session("alert-error") }}', 'error');
+				@endif
+				}
+		);
+
+
+	</script>
 </html>

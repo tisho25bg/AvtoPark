@@ -29,6 +29,12 @@ class HomeController extends Controller
 		{
 			$request->session()->flash('alert-error', $request->session()->get('alert-error'));
 		}
+
+
+		if ($request->session()->get('alert-success'))
+		{
+			$request->session()->flash('alert-success', $request->session()->get('alert-success'));
+		}
 		switch (\Auth::user()->role->code)
 		{
 			case \App\Role::ROLE_ADMINISTRATOR:

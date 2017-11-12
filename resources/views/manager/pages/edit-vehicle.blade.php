@@ -11,13 +11,13 @@
 					</div>
 					<div class="card-content">
 						<div class="card-content">
-							<form method="POST" action="create-vehicle">
+							<form method="POST">
 								{{ csrf_field() }}
 								<div class="row">
 									<div class="col-md-3">
 										<div class="form-group label-floating {{$errors->has('brand') ? 'has-error' : ''}}">
 											<label  class="control-label" for="brand">Марка</label>
-											<input type="text" class="form-control" name="brand" id="name" value="{{old('brand')}}">
+											<input type="text" class="form-control" name="brand" id="name" value="{{$vehicle->brand}}">
 
 											@if($errors->has('brand'))
 											<span class="danger">
@@ -29,7 +29,7 @@
 									<div class="col-md-4">
 										<div class="form-group label-floating {{$errors->has('regNumber') ? 'has-error' : ''}}">
 											<label class="control-label">Регистрационен номер</label>
-											<input type="text" class="form-control" name="regNumber" value="{{old('regNumber')}}">
+											<input type="text" class="form-control" name="regNumber" value="{{$vehicle->regNumber}}">
 
 											@if($errors->has('regNumber'))
 											<span class="danger">
@@ -45,9 +45,9 @@
 										<div class="form-group label-floating {{$errors->has('vehicle_engine') ? 'has-error' : ''}} ">
 											<select class="selectpicker" data-style="btn btn-primary btn-round" title="Тип на двигателя" data-size="4" name="vehicle_engine" id="vehicle_engine">
 												<option value="">--Без избор--</option>
-												<option value="benz">Бензин</option>
-												<option value="dizel">Дизел</option>
-												<option value="agu">АГУ</option>
+												<option value="benz" @if($vehicle->fuelType == 'benz') selected=selected @endif >Бензин</option>
+												<option value="dizel" @if($vehicle->fuelType == 'dizel') selected=selected @endif >Дизел</option>
+												<option value="agu" @if($vehicle->fuelType == 'agu') selected=selected @endif >АГУ</option>
 											</select>
 										</div>
 									</div>
@@ -57,7 +57,7 @@
 											<select class="selectpicker" data-style="btn btn-primary btn-round" title="Тип на МПС" data-size="{{count($vehicleTypes) + 1}}" name="vehicle_type" id="vehicle_type">
 												<option value="">--Без избор--</option>
 												@foreach($vehicleTypes as $vehicleType)
-												<option value="{{ $vehicleType->id }}">{{ $vehicleType->type }}</option>
+												<option value="{{ $vehicleType->id }}" @if($vehicle->vehicle_types->id == $vehicleType->id) selected=selected @endif>{{ $vehicleType->type }}</option>
 												@endforeach
 											</select>
 										</div>
@@ -68,7 +68,7 @@
 											<select class="selectpicker" data-style="btn btn-primary btn-round" title="Статус на МПС" data-size="{{count($vehicleStatuses) + 1}}" name="vehicle_status" id="vehicle_status">
 												<option value="">--Без избор--</option>
 												@foreach($vehicleStatuses as $vehicleStatus)
-												<option value="{{ $vehicleStatus->id }}">{{ $vehicleStatus->type }}</option>
+												<option value="{{ $vehicleStatus->id }}" @if($vehicle->status->id == $vehicleStatus->id) selected=selected @endif>{{ $vehicleStatus->type }}</option>
 												@endforeach
 											</select>
 										</div>
@@ -79,7 +79,7 @@
 									<div class="col-md-4">
 										<div class="form-group label-floating {{$errors->has('fuelConsumption') ? 'has-error' : ''}}">
 											<label class="control-label">Разход на гориво</label>
-											<input type="text" class="form-control" name="fuelConsumption" value="{{old('fuelConsumption')}}">
+											<input type="text" class="form-control" name="fuelConsumption" value="{{$vehicle->fuelConsumption}}">
 
 											@if($errors->has('fuelConsumption'))
 											<span class="danger">
@@ -92,7 +92,7 @@
 									<div class="col-md-3">
 										<div class="form-group label-floating {{$errors->has('mileage') ? 'has-error' : ''}}">
 											<label class="control-label">Изминати километри</label>
-											<input type="text" class="form-control" name="mileage" value="{{old('mileage')}}">
+											<input type="text" class="form-control" name="mileage" value="{{$vehicle->mileage}}">
 
 											@if($errors->has('mileage'))
 											<span class="danger">
@@ -105,7 +105,7 @@
 									<div class="col-md-4">
 										<div class="form-group label-floating {{$errors->has('chargeWeight') ? 'has-error' : ''}}">
 											<label class="control-label">Полезен товар</label>
-											<input type="text" class="form-control" name="chargeWeight" value="{{old('chargeWeight')}}">
+											<input type="text" class="form-control" name="chargeWeight" value="{{$vehicle->chargeWeight}}">
 
 											@if($errors->has('chargeWeight'))
 											<span class="danger">
@@ -120,7 +120,7 @@
 									<div class="col-md-4">
 										<div class="form-group label-floating {{$errors->has('insurance') ? 'has-error' : ''}}">
 											<label>Гражданска Отговорност/изтича/</label>
-											<input type="date" class="form-control" name="insurance" value="{{old('insurance')}}">
+											<input type="date" class="form-control" name="insurance" value="{{$vehicle->insurance}}">
 
 											@if($errors->has('insurance'))
 											<span class="danger">
@@ -133,7 +133,7 @@
 									<div class="col-md-5">
 										<div class="form-group label-floating {{$errors->has('technicalReview') ? 'has-error' : ''}}">
 											<label>Технически преглед/изтича/</label>
-											<input type="date" class="form-control" name="technicalReview" value="{{old('technicalReview')}}">
+											<input type="date" class="form-control" name="technicalReview" value="{{$vehicle->technicalReview}}">
 
 											@if($errors->has('technicalReview'))
 											<span class="danger">
@@ -144,13 +144,14 @@
 									</div>
 								</div>
 
+								<br>
+								<input type="hidden" name="vhid" value="{{$vehicle->id}}" />
+								<button type="submit" class="btn btn-primary pull-right">Съхрани</button>
+								<div class="clearfix"></div>
+							</form>
 						</div>
 
-						<br>
 
-						<button type="submit" class="btn btn-primary pull-right">Добави</button>
-						<div class="clearfix"></div>
-						</form>
 					</div>
 				</div>
 			</div>

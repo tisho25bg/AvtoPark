@@ -1,8 +1,6 @@
 @extends('admin.admin')
 @section('content')
-<div class="container">
-	<br>
-	<br>
+<div class="content">
 	<h4>Control Panel - Administrator</h4>
 </div>
 @endsection

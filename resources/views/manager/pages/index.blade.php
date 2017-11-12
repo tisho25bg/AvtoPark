@@ -1,8 +1,6 @@
 @extends('manager.manager')
 @section('content')
-<div class="container">
-	<br>
-	<br>
+<div class="content">
 	<h4>Control Panel - Manager</h4>
 </div>
 @endsection

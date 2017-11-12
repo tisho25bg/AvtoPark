@@ -87,11 +87,26 @@ Route::group(['middleware' => ['auth', 'roles'], 'prefix' => 'manager'], functio
 		'uses'	 => 'ManagerController@showVehicles',
 		'roles'	 => ['admin', 'manager']
 	]);
+	Route::get('/delete-vehicle/{id}', [
+		'as'	 => 'delete-vehicle',
+		'uses'	 => 'ManagerController@deleteVehicle',
+		'roles'	 => ['admin', 'manager'],
+	]);
 
 	Route::get('/maps', [
 		'as'	 => 'maps',
 		'uses'	 => 'ManagerController@maps',
 		'roles'	 => ['admin', 'manager']
+	]);
+	Route::get('/edit-vehicle/{id}', [
+		'as'	 => 'edit-vehicle',
+		'uses'	 => 'ManagerController@editVehicle',
+		'roles'	 => ['admin', 'manager'],
+	]);
+	Route::post('/edit-vehicle/{id}', [
+		'as'	 => 'edit-vehicle',
+		'uses'	 => 'ManagerController@saveVehicle',
+		'roles'	 => ['admin', 'manager'],
 	]);
 });
 

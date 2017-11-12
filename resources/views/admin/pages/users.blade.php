@@ -67,43 +67,6 @@
 @parent();
 <script>
 	$(document).ready(function () {
-		$('#datatables').DataTable({
-			"pagingType": "full_numbers",
-			"lengthMenu": [
-				[10, 25, 50, -1],
-				[10, 25, 50, "All"]
-			],
-			responsive: true,
-			language: {
-				"decimal": "",
-				"emptyTable": "Няма информация за показване",
-				"info": "От _START_ до _END_ от общо _TOTAL_ записа",
-				"infoEmpty": "",
-				"infoFiltered": "(филтрирано от общо _MAX_ записа)",
-				"infoPostFix": "",
-				"thousands": ",",
-				"lengthMenu": "Покажи _MENU_ записа",
-				"loadingRecords": "Зареждане...",
-				"processing": "Обработка...",
-				"search": "Търсене:",
-				"zeroRecords": "Няма съвпадения",
-				"paginate": {
-					"first": "Първа",
-					"last": "Последна",
-					"next": "следваща",
-					"previous": "предишна"
-				},
-				"aria": {
-					"sortAscending": ": сортиране низходящо",
-					"sortDescending": ": сортиране възходящо"
-				}
-			}
-
-		});
-
-
-		var table = $('#datatables').DataTable();
-
 		$('.remove').on('click', function () {
 			if (confirm('Сигурни ли сте?')) {
 				var userId = $(this).data('user');

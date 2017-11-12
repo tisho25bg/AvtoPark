@@ -21,7 +21,7 @@ class AdminController extends Controller
 
 	public function createUser()
 	{
-		$roles = \App\Role::where('code', '!=', \App\Role::ROLE_ADMINISTRATOR)->get();
+		$roles = \App\Role::all();
 		return view('admin.pages.create-user')
 				->with('roles', $roles);
 	}
@@ -31,12 +31,16 @@ class AdminController extends Controller
 
 		$user = new User();
 		$user->store($request);
+
+		$request->session()->flash('alert-success', 'Успешно добавихте потребител!');
 		return redirect()->route('users');
 	}
 
-	public function deleteUser($id)
+	public function deleteUser($id, \Illuminate\Http\Request $request)
 	{
 		User::find($id)->delete();
+
+		$request->session()->flash('alert-success', 'Успешно изтрихте потребител!');
 		return redirect()->route('users');
 	}
 
@@ -62,6 +66,8 @@ class AdminController extends Controller
 		$user->save();
 
 		$roles = \App\Role::all();
+
+		$request->session()->flash('alert-success', 'Успешно редактирахте потребител!');
 		return view('admin.pages.edit-user')
 				->with('user', $user)
 				->with('roles', $roles);
