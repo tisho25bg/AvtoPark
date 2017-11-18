@@ -23,11 +23,15 @@
                 </ul>
             </li>
 			<li class="dropdown">
-				<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
 					<i class="material-icons">sort</i>
-					<p class="active">Услуги</p>
-				</a>
-			</li>
+                    <p class="active">Услуги</p>
+                </a>
+                <ul class="dropdown-menu" data-color="purple" >
+                    <li><a href="{{ route('show-services') }}">Всички услуги</a></li>
+                    <li><a href="{{ route('create-service') }}">Добавяне на услуга</a></li>
+                </ul>
+            </li>
             <li>
 
                 <a href="{{route('manager')}}" >
