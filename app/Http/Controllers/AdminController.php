@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Services;
 use App\Http\Requests\ShareFormRequest;
+use App\Http\Requests\StoreService;
 
 class AdminController extends Controller
 {
@@ -75,6 +77,61 @@ class AdminController extends Controller
 		return view('admin.pages.edit-user')
 				->with('user', $user)
 				->with('roles', $roles);
+	}
+
+	////////////////////////////////////////////////////
+	////////////////////////////////////////////////////
+	////////////////////////////////////////////////////
+	public function showService()
+	{
+		return view('admin.pages.services')->with('services', Services::all());
+	}
+
+	public function createService()
+	{
+		return view('admin.pages.create-service');
+	}
+
+	public function storeService(StoreService $request)
+	{
+		$service = new Services();
+		$service->create($request);
+
+		$request->session()->flash('alert-success', 'Успешно добавихте Услуга!');
+		return redirect()->route('show-services');
+	}
+
+	public function editService($id)
+	{
+		$service = Services::find($id);
+		return view('admin.pages.edit-service')
+				->with('service', $service);
+	}
+
+	public function saveService($id, StoreService $request)
+	{
+		$service = Services::find($id);
+		foreach ($request->all() as $k => $v)
+		{
+			if (isset($service->$k))
+			{
+				$service->$k = $v;
+			}
+		}
+		$service->save();
+
+
+		$request->session()->flash('alert-success', 'Успешно редактирахте услуга!');
+		return view('admin.pages.edit-service')
+				->with('service', $service);
+	}
+
+	public function deleteService($id, \Illuminate\Http\Request $request)
+	{
+		Services::find($id)->delete();
+
+		$request->session()->flash('alert-success', 'Успешно изтрихте услуга!');
+		return redirect()->route('show-services');
 	}
 
 }

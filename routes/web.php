@@ -61,6 +61,40 @@ Route::group(['middleware' => ['auth', 'roles'], 'prefix' => 'admin'], function 
 		'uses'	 => 'AdminController@saveUser',
 		'roles'	 => 'admin',
 	]);
+	////////////////////////////////////////////////////
+	////////////////////////////////////////////////////
+	////////////////////////////////////////////////////
+	Route::get('/show-services', [
+		'as'	 => 'show-services',
+		'uses'	 => 'AdminController@showService',
+		'roles'	 => ['admin'],
+	]);
+	Route::get('/create-service', [
+		'as'	 => 'create-service',
+		'uses'	 => 'AdminController@createService',
+		'roles'	 => ['admin'],
+	]);
+	Route::post('/create-service', [
+		'as'	 => 'create-service',
+		'uses'	 => 'AdminController@storeService',
+		'roles'	 => ['admin'],
+	]);
+	Route::get('/edit-service/{id}', [
+		'as'	 => 'edit-service',
+		'uses'	 => 'AdminController@editService',
+		'roles'	 => 'admin',
+	]);
+	Route::post('/edit-service/{id}', [
+		'as'	 => 'edit-service',
+		'uses'	 => 'AdminController@saveService',
+		'roles'	 => 'admin',
+	]);
+
+	Route::get('/delete-service/{id}', [
+		'as'	 => 'delete-service',
+		'uses'	 => 'AdminController@deleteService',
+		'roles'	 => ['admin'],
+	]);
 });
 Route::group(['middleware' => ['auth', 'roles'], 'prefix' => 'manager'], function ()
 {

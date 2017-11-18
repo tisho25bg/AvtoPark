@@ -8,19 +8,19 @@
         <ul class="nav">
             <li>
                 <a href="{{route('driver')}}" >
-                    {{ Auth::user()->fullName }}
+                    {{ Auth::user()->firstName }}
                 </a>
             </li>
             <li class="dropdown">
 
-            @if(Auth::user()->hasRole('ADMIN'))
-                <li>
-                    <a href="{{route('admin')}}" >
-                        <i class="material-icons">reply</i>
-                        Admin panel
-                    </a>
-                </li>
-                @endif
+				@if(Auth::user()->hasRole('ADMIN'))
+			<li>
+				<a href="{{route('admin')}}" >
+					<i class="material-icons">reply</i>
+					Admin panel
+				</a>
+			</li>
+			@endif
             </li>
         </ul>
     </div>
