@@ -58,12 +58,16 @@ class AdminController extends Controller
 		$user = User::find($id);
 		foreach ($request->all() as $k => $v)
 		{
-			if (isset($user->$k))
+			if (in_array($k, $user->getFillable()))
 			{
 				$user->$k = $v;
 			}
 		}
-		$user->save();
+        if($user->role->code != 'DRIVER' ){
+            $user->driveLicenseCategory =  '';
+            $user->driveLicenseExpired =  null;
+        }
+        $user->save();
 
 		$roles = \App\Role::all();
 

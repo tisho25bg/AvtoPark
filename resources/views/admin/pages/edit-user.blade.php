@@ -93,13 +93,13 @@
 									<div class="col-md-5" style="margin-top: 25px;">
 										<div class="form-group label-floating">
 											<label class="control-label">Категория</label>
-											<input type="text" class="form-control" name="category" value="{{$user->driveLicenseCategory}}">
+											<input type="text" class="form-control" name="driveLicenseCategory" value="{{$user->driveLicenseCategory}}">
 										</div>
 									</div>
 									<div class="col-md-6">
 										<div class="form-group label-floating">
 											<label>Дата на изтичане</label>
-											<input type="date" class="form-control" name="expired" value="{{$user->driveLicenseExpired}}">
+											<input type="date" class="form-control" name="driveLicenseExpired" value="{{$user->driveLicenseExpired}}">
 										</div>
 									</div>
 								</div>

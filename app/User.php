@@ -18,7 +18,7 @@ class User extends Authenticatable
 	 * @var array
 	 */
 	protected $fillable = [
-		'name', 'email', 'password', 'egn', 'drive_license', 'role_id',
+		'firstName', 'lastName', 'email', 'password', 'egn', 'driveLicenseCategory', 'driveLicenseExpired', 'role_id',
 	];
 	protected $haveRole;
 
@@ -37,7 +37,7 @@ class User extends Authenticatable
 		'password', 'remember_token',
 	];
 	protected $dates	 = [
-		'drive_license',
+		'driveLicenseExpired',
 	];
 
 	public function store(\Illuminate\Http\Request $request)
