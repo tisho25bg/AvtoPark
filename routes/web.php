@@ -84,6 +84,7 @@ Route::group(['middleware' => ['auth', 'roles'], 'prefix' => 'admin'], function 
 		'uses'	 => 'AdminController@editService',
 		'roles'	 => 'admin',
 	]);
+
 	Route::post('/edit-service/{id}', [
 		'as'	 => 'edit-service',
 		'uses'	 => 'AdminController@saveService',
@@ -142,6 +143,64 @@ Route::group(['middleware' => ['auth', 'roles'], 'prefix' => 'manager'], functio
 		'uses'	 => 'ManagerController@saveVehicle',
 		'roles'	 => ['admin', 'manager'],
 	]);
+
+	Route::get('/show-orders',[
+	    'as'    =>  'show-orders',
+        'uses'  =>  'ManagerController@showOrders',
+        'roles' =>  ['admin', 'manager'],
+    ]);
+
+	Route::get('/create-order', [
+	    'as'    =>  'create-order',
+        'uses'  =>  'ManagerController@createOrder',
+        'roles' =>  ['admin', 'manager'],
+    ]);
+
+	Route::post('/create-order', [
+	    'as'    =>  'create-order',
+        'uses'  =>  'ManagerController@storeOrder',
+        'roles' =>  ['admin', 'manager'],
+    ]);
+
+	Route::get('/edit-order/{id}', [
+	    'as'    =>  'edit-order',
+        'uses'  =>  'ManagerController@editOrder',
+        'roles' =>  ['admin', 'manager'],
+    ]);
+	Route::post('/edit-order/{id}', [
+	    'as'    =>  'edit-order',
+        'uses'  =>  'ManagerController@saveOrder',
+        'roles' =>  ['admin', 'manager'],
+    ]);
+    Route::get('/delete-order/{id}', [
+        'as'	 => 'delete-order',
+        'uses'	 => 'ManagerController@deleteOrder',
+        'roles'	 => ['admin', 'manager'],
+    ]);
+
+    Route::get('/vehicle-profile/{id}', [
+        'as'	 => 'vehicle-profile',
+        'uses'	 => 'ManagerController@vehicleProfile',
+        'roles'	 => ['admin', 'manager'],
+    ]);
+
+    Route::get('/vehicle-repair-profile/{id}', [
+        'as'	 => 'vehicle-repair-profile',
+        'uses'	 => 'ManagerController@vehicleRepairProfile',
+        'roles'	 => ['admin', 'manager'],
+    ]);
+
+    Route::get('/new-orders', [
+        'as'     =>  'new-orders',
+        'uses'   =>  'ManagerController@newOrderFromCustomer',
+        'roles'	 => ['admin', 'manager'],
+    ]);
+
+    Route::post('/create-customer-order/{id}', [
+        'as'     =>  'create-customer-order',
+        'uses'   =>  'ManagerController@storeOrderFromCustomer',
+        'roles'	 => ['admin', 'manager'],
+    ]);
 });
 
 Route::group(['middleware' => ['auth', 'roles'], 'prefix' => 'customer'], function ()
@@ -151,6 +210,30 @@ Route::group(['middleware' => ['auth', 'roles'], 'prefix' => 'customer'], functi
 		'uses'	 => 'CustomerController@index',
 		'roles'	 => ['customer'],
 	]);
+
+	Route::get('/create-customer-order', [
+	    'as'    =>  'create-customer-order',
+        'uses'  =>  'CustomerController@createOrder',
+        'roles' =>  ['admin', 'customer']
+    ]);
+
+    Route::post('/create-customer-order', [
+        'as'    =>  'create-customer-order',
+        'uses'  =>  'CustomerController@storeOrder',
+        'roles' =>  ['admin', 'customer']
+    ]);
+
+    Route::get('/customer-orders', [
+        'as'    =>  'customer-orders',
+        'uses'  =>  'CustomerController@showCustomerOrders',
+        'roles' =>  ['admin', 'customer']
+    ]);
+
+    Route::post('/calculate-order', [
+        'as'    =>  'calculate-order',
+        'uses'  =>  'CustomerController@calculateOrder',
+        'roles' =>  ['admin', 'customer']
+    ]);
 });
 
 Route::group(['middleware' => ['auth', 'roles'], 'prefix' => 'driver'], function ()
@@ -160,4 +243,14 @@ Route::group(['middleware' => ['auth', 'roles'], 'prefix' => 'driver'], function
 		'uses'	 => 'DriverController@index',
 		'roles'	 => ['driver'],
 	]);
+    Route::post('/start-order', [
+        'as'	 => 'startOrder',
+        'uses'	 => 'DriverController@startOrder',
+        'roles'	 => ['driver'],
+    ]);
+    Route::post('/end-order', [
+        'as'	 => 'endOrder',
+        'uses'	 => 'DriverController@endOrder',
+        'roles'	 => ['driver'],
+    ]);
 });

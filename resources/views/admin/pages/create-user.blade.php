@@ -118,6 +118,31 @@
 								</div>
 							</div>
 
+							<div id="CUSTOMER_only" style="display: none;" class="hiddenfield">
+								<br />
+								<hr />
+								<div class="row">
+									<div class="col-md-3" >
+										<div class="form-group label-floating">
+											<label class="control-label">БУЛСТАТ/ЕИК</label>
+											<input type="text" class="form-control" name="bulstat">
+										</div>
+									</div>
+									<div class="col-md-5">
+										<div class="form-group label-floating">
+											<label class="control-label">Адрес на фирмата</label>
+											<input type="text" class="form-control" name="customerAddress">
+										</div>
+									</div>
+									<div class="col-md-3">
+										<div class="form-group label-floating">
+											<label class="control-label">Телефон</label>
+											<input type="text" class="form-control" name="customerPhone">
+										</div>
+									</div>
+								</div>
+							</div>
+
 							<button type="submit" class="btn btn-primary pull-right">Create Profile</button>
 						</form>
 					</div>

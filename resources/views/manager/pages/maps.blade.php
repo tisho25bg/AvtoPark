@@ -2,36 +2,16 @@
 @section('content')
     <p>Click on the map to add A and B points, drag the points to change the places.</p>
 
-    <div id="map-holder"></div>
-    <div id="text-holder"></div>
     <form action="/sdfsdf">
-        <input type="text" name="A" id="address-a" placeholder="Address 1" required />
-        <input type="text" name="B" id="address-b" placeholder="Address 2" required />
+        <input type="text" name="A" id="address-a"  required />
+        <input type="text" name="B" id="address-b"  required />
         <input type="text" name="distance" id="distance" disabled required />
         <input type="text" name="time" id="time" disabled required />
         <div>
             <input type="submit" value="Send data"/>
         </div>
     </form>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-        }
 
-        p {
-            font-size: 14px;
-            color: #333;
-            line-height: 30px;
-            padding: 0 5px;
-        }
-
-        #map-holder {
-            height: 400px;
-            width: 100%;
-        }
-    </style>
     <script type='text/javascript'>
         var onMapLoad = function () {
             var textHolderDomEl = document.getElementById('text-holder'),

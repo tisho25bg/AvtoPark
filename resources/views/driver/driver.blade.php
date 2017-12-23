@@ -41,14 +41,74 @@
 
 </div>
 </body>
-
-<!--   Core JS Files   -->
-<script src="../assets/js/jquery-3.1.0.min.js" type="text/javascript"></script>
-<script src="../assets/js/bootstrap.min.js" type="text/javascript"></script>
-<script src="../assets/js/material.min.js" type="text/javascript"></script>
+<script src="/assets/js/jquery-3.1.0.min.js" type="text/javascript"></script>
+<script src="/assets/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="/assets/js/bootstrap-notify.js" type="text/javascript"></script>
+<script src="/assets/js/jquery.datatables.js" type="text/javascript"></script>
+<script src="/assets/js/jquery.select-bootstrap.js" type="text/javascript"></script>
+<script src="/assets/js/material.min.js" type="text/javascript"></script>
 
 <!-- Material Dashboard javascript methods -->
-<script src="../assets/js/material-dashboard.js"></script>
+<script src="/assets/js/material-dashboard.js"></script>
 @yield('scripts')
+<script>
+    function showNotification(message, type) {
+        $.notify({
+            icon: "notifications",
+            message: message
 
+        }, {
+            type: type,
+            timer: 2000,
+            placement: {
+                from: 'top',
+                align: 'right'
+            }
+        });
+    }
+    $().ready(function () {
+            @if (session('alert-success'))
+showNotification('{{ session("alert-success") }}', 'success');
+            @endif
+
+                    @if (session('alert-error'))
+showNotification('{{ session("alert-error") }}', 'error');
+                @endif
+        }
+    );
+
+    $('#datatables').DataTable({
+        "pagingType": "full_numbers",
+        "lengthMenu": [
+            [10, 25, 50, -1],
+            [10, 25, 50, "All"]
+        ],
+        responsive: true,
+        language: {
+            "decimal": "",
+            "emptyTable": "Няма информация за показване",
+            "info": "От _START_ до _END_ от общо _TOTAL_ записа",
+            "infoEmpty": "",
+            "infoFiltered": "(филтрирано от общо _MAX_ записа)",
+            "infoPostFix": "",
+            "thousands": ",",
+            "lengthMenu": "Покажи _MENU_ записа",
+            "loadingRecords": "Зареждане...",
+            "processing": "Обработка...",
+            "search": "Търсене:",
+            "zeroRecords": "Няма съвпадения",
+            "paginate": {
+                "first": "Първа",
+                "last": "Последна",
+                "next": "следваща",
+                "previous": "предишна"
+            },
+            "aria": {
+                "sortAscending": ": сортиране низходящо",
+                "sortDescending": ": сортиране възходящо"
+            }
+        }
+
+    });
+</script>
 </html>

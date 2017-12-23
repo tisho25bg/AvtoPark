@@ -12270,10 +12270,12 @@ footer .btn {
 .card .card-content {
     padding: 15px 20px;
     position: relative;
+
 }
 
 .card .card-content .category {
     margin-bottom: 0;
+
 }
 
 .card .card-actions {
@@ -12284,6 +12286,7 @@ footer .btn {
     left: 17px;
     right: 17px;
     text-align: center;
+
 }
 
 .card .card-actions .btn {
@@ -12299,6 +12302,7 @@ footer .btn {
 .card .card-header {
     padding: 15px 20px 0;
     z-index: 3;
+
 }
 
 .card .card-header .category {
@@ -12344,6 +12348,7 @@ footer .btn {
     margin-top: 15px;
     text-align: center;
     padding: 0;
+
 }
 
 .card .social-line .btn {
@@ -12359,6 +12364,7 @@ footer .btn {
     padding: 15px;
     background-color: #999999;
     position: relative;
+
 }
 
 .card [data-background-color] .card-title {

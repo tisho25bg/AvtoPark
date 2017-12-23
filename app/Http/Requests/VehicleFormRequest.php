@@ -24,18 +24,22 @@ class VehicleFormRequest extends FormRequest
 	 */
 	public function rules()
 	{
+
 		return [
 			'brand'				 => 'required',
 			'regNumber'			 => 'required|unique:vehicles,regNumber,' . $this->get('vhid'),
 			'vehicle_engine'	 => 'required',
 			'vehicle_type'		 => 'required',
-			'vehicle_status'	 => 'required',
+			'vehicle_status_id'	 => 'required',
 			'fuelConsumption'	 => 'required',
 			'mileage'			 => 'required',
 			'chargeWeight'		 => 'required',
 			'insurance'			 => 'required',
 			'technicalReview'	 => 'required',
-		];
+            'driveLicenseNeed'   => 'required'
+
+        ];
+
 	}
 
 	public function messages()
@@ -46,12 +50,13 @@ class VehicleFormRequest extends FormRequest
 			'regNumber.unique'			 => 'В базата съществува МПС със зададения регистрационен номер!',
 			'vehicle_engine.required'	 => 'Полето "Тип на двигателя" е задължително!',
 			'vehicle_type.required'		 => 'Полето "Тип на МПС" е задължително!',
-			'vehicle_status.required'	 => 'Полето "Статус на МПС" е задължително!',
+			'vehicle_status_id.required' => 'Полето "Статус на МПС" е задължително!',
 			'fuelConsumption.required'	 => 'Полето "Разход на гориво" е задължително!',
 			'mileage.required'			 => 'Полето "Изминати километри" е задължително!',
 			'chargeWeight.required'		 => 'Полето "Полезен товар" е задължително!',
 			'insurance.required'		 => 'Полето "Гражданска отговорност" е задължително!',
 			'technicalReview.required'	 => 'Полето "Технически преглед" е задължително!',
+            'driveLicenseNeed.required'  => 'Полето е задължително!'
 		];
 	}
 

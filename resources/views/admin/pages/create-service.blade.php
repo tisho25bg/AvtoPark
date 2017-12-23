@@ -88,8 +88,6 @@
 										@endif
 									</div>
 								</div>
-
-
 							</div>
 							<button type="submit" class="btn btn-primary pull-right">Create Service</button>
 						</form>

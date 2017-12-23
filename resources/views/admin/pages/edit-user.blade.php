@@ -99,7 +99,7 @@
 									<div class="col-md-6">
 										<div class="form-group label-floating">
 											<label>Дата на изтичане</label>
-											<input type="date" class="form-control" name="driveLicenseExpired" value="{{$user->driveLicenseExpired}}">
+											<input type="date" class="form-control" name="driveLicenseExpired" id="driveLicenseExpired" value="{{$user->driveLicenseExpired}}">
 										</div>
 									</div>
 								</div>

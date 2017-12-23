@@ -27,6 +27,9 @@ class User extends Authenticatable
 	{
 		return $this->hasOne('App\Role', 'id', 'role_id');
 	}
+    public function orders(){
+        return $this->hasMany('App\Orders', 'driver_id', 'id');
+    }
 
 	/**
 	 * The attributes that should be hidden for arrays.
@@ -50,6 +53,9 @@ class User extends Authenticatable
 		$this->driveLicenseCategory	 = $request->category;
 		$this->driveLicenseExpired	 = $request->expired;
 		$this->role_id				 = $request->role_id;
+		$this->bulstat               = $request->bulstat;
+		$this->customerAddress       = $request->customerAddress;
+		$this->customerPhone         = $request->customerPhone;
 		$this->save();
 	}
 
@@ -91,5 +97,22 @@ class User extends Authenticatable
     public function getFullNameAttribute()
     {
         return ucfirst($this->firstName) . ' ' . ucfirst($this->lastName);
+    }
+
+    public function getDriverNewOrders(){
+	    $newOrderId = OrderStatus::where('type', '=',  OrderStatus::ORDER_STATUS_PROCESSING)->first()->id;
+        return Orders::where('driver_id', '=', $this->id)
+            ->where('order_status_id', '=', $newOrderId)
+            ->orderBy('created_at', 'desc')
+            ->limit(5);
+    }
+
+    public function getCustomerNewOrders()
+    {
+        $newOrderId = OrderStatus::where('type', '=', OrderStatus::ORDER_STATUS_NEW)->first()->id;
+        return Orders::whereNull('manager_id')
+                ->where('order_status_id', '=', $newOrderId)
+                ->orderBy('created_at', 'desc')
+                ->limit(5);
     }
 }

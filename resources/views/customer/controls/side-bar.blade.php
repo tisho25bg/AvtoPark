@@ -19,8 +19,19 @@
                         Admin panel
                     </a>
                 </li>
-                @endif
+            @endif
             </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="material-icons">shopping_cart</i>
+                        <p class="active">Поръчки</p>
+                    </a>
+
+                    <ul class="dropdown-menu" data-color="purple" >
+                        <li><a href="{{ route('create-customer-order') }}">Нова поръчка</a></li>
+                        <li><a href="{{ route('customer-orders') }}">Моите поръчки</a></li>
+                    </ul>
+                </li>
         </ul>
     </div>
 </div>

@@ -9,7 +9,7 @@
 						<i class="material-icons">assignment</i>
 					</div>
 					<div class="card-content">
-						<h4 class="card-title">Всички потребители</h4>
+						<h4 class="card-title">Всички услуги</h4>
 						<div class="toolbar">
 						</div>
 						<div class="material-datatables">

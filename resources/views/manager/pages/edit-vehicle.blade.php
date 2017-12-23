@@ -6,13 +6,14 @@
 			<div class="col-md-8">
 				<div class="card">
 					<div class="card-header" data-background-color="purple">
-						<h4 class="title">Добавяне на превозно средство</h4>
-						<p class="category">Тук е форма за създаване на нов превозни средства</p>
+						<h4 class="title">Редактиране на превозно средство</h4>
+						<p class="category">Тук е форма за редактиране на съществуващи превозни средства</p>
 					</div>
 					<div class="card-content">
 						<div class="card-content">
 							<form method="POST">
 								{{ csrf_field() }}
+
 								<div class="row">
 									<div class="col-md-3">
 										<div class="form-group label-floating {{$errors->has('brand') ? 'has-error' : ''}}">
@@ -65,17 +66,36 @@
 
 									<div class="col-md-3">
 										<div class="form-group label-floating {{$errors->has('vehicle_status') ? 'has-error' : ''}}">
-											<select class="selectpicker" data-style="btn btn-primary btn-round" title="Статус на МПС" data-size="{{count($vehicleStatuses) + 1}}" name="vehicle_status" id="vehicle_status">
+											<select class="selectpicker" data-style="btn btn-primary btn-round" title="Статус на МПС" data-size="{{count($vehicleStatuses) + 1}}" name="vehicle_status_id" id="vehicle_status_id">
 												<option value="">--Без избор--</option>
 												@foreach($vehicleStatuses as $vehicleStatus)
-												<option value="{{ $vehicleStatus->id }}" @if($vehicle->status->id == $vehicleStatus->id) selected=selected @endif>{{ $vehicleStatus->type }}</option>
+												<option  data-code={{$vehicleStatus->type}} value="{{ $vehicleStatus->id }}"
+														 @if($vehicle->status->id == $vehicleStatus->id)
+														 	selected=selected
+												   		@endif>
+															{{ $vehicleStatus->type }}
+												</option>
 												@endforeach
 											</select>
 										</div>
 									</div>
 								</div>
 
+
 								<div class="row">
+									<div class="col-md-5">
+										<div class="form-group label-floating {{$errors->has('driveLicenseNeed') ? 'has-error' : ''}}">
+											<label class="control-label">Необходима шофьорска книжка</label>
+											<input type="text" class="form-control" name="driveLicenseNeed" id="driveLicenseNeed" value="{{$vehicle->driveLicenseNeed}}">
+
+											@if($errors->has('driveLicenseNeed'))
+												<span class="danger">
+													{{$errors->first('driveLicenseNeed')}}
+												</span>
+											@endif
+										</div>
+									</div>
+
 									<div class="col-md-4">
 										<div class="form-group label-floating {{$errors->has('fuelConsumption') ? 'has-error' : ''}}">
 											<label class="control-label">Разход на гориво</label>
@@ -89,7 +109,7 @@
 										</div>
 									</div>
 
-									<div class="col-md-3">
+									<div class="col-md-4">
 										<div class="form-group label-floating {{$errors->has('mileage') ? 'has-error' : ''}}">
 											<label class="control-label">Изминати километри</label>
 											<input type="text" class="form-control" name="mileage" value="{{$vehicle->mileage}}">
@@ -117,16 +137,17 @@
 								</div>
 
 								<div class="row">
-									<div class="col-md-4">
+									<div class="col-md-5">
 										<div class="form-group label-floating {{$errors->has('insurance') ? 'has-error' : ''}}">
 											<label>Гражданска Отговорност/изтича/</label>
 											<input type="date" class="form-control" name="insurance" value="{{$vehicle->insurance}}">
 
 											@if($errors->has('insurance'))
-											<span class="danger">
-												{{$errors->first('insurance')}}
-											</span>
+												<span class="danger">
+													{{$errors->first('insurance')}}
+												</span>
 											@endif
+
 										</div>
 									</div>
 
@@ -144,9 +165,77 @@
 									</div>
 								</div>
 
+
+
 								<br>
 								<input type="hidden" name="vhid" value="{{$vehicle->id}}" />
-								<button type="submit" class="btn btn-primary pull-right">Съхрани</button>
+
+
+									<div id="OnRepair_cont" class="row @if($vehicle->status->type != 'OnRepair') hiddenfield @endif">
+										<div class="col-md-3" >
+											<div class="form-group label-floating {{$errors->has('dateInRepair') ? 'has-error' : ''}}">
+												<label >Дата на приемане</label>
+												<input type="date" class="form-control" name="dateInRepair" value="{{$vehicleRepairData['dateInRepair']}}">
+											</div>
+
+											@if($errors->has('dateInRepair'))
+												<span class="danger">
+												{{$errors->first('dateInRepair')}}
+											</span>
+											@endif
+										</div>
+										<div class="col-md-4">
+											<div class="form-group label-floating {{$errors->has('serviceName') ? 'has-error' : ''}}">
+												<label >Сервиз</label>
+												<input type="text" class="form-control" name="serviceName" value="{{$vehicleRepairData['serviceName']}}">
+											</div>
+											@if($errors->has('serviceName'))
+												<span class="danger">
+													{{$errors->first('serviceName')}}
+												</span>
+											@endif
+										</div>
+										<div class="col-md-4">
+											<div class="form-group label-floating {{$errors->has('repairType') ? 'has-error' : ''}}">
+												<label>Вид ремонт или услуга</label>
+												<input type="text" class="form-control" name="repairType" value="{{$vehicleRepairData['repairType']}}">
+											</div>
+											@if($errors->has('repairType'))
+												<span class="danger">
+													{{$errors->first('repairType')}}
+												</span>
+											@endif
+										</div>
+										<div class="col-md-3" {{$errors->has('price') ? 'has-error' : ''}}>
+											<div class="form-group label-floating">
+												<label>Цена</label>
+												<input type="text" class="form-control" name="price" value="{{$vehicleRepairData['price']}}">
+											</div>
+											@if($errors->has('price'))
+												<span class="danger">
+													{{$errors->first('price')}}
+												</span>
+											@endif
+										</div>
+									</div>
+
+
+								<div id="OnRepairToFree_cont" class="row @if($vehicle->status->type != 'Free') hiddenfield @endif">
+									<div class="col-md-3" {{$errors->has('dateOutRepair') ? 'has-error' : ''}}>
+									<div class="form-group label-floating {{$errors->has('dateOutRepair') ? 'has-error' : ''}}">
+										<label >Дата на излизане от сервиза</label>
+										<input type="date" class="form-control" name="dateOutRepair" value="{{$vehicleRepairData['dateOutRepair']}}">
+									</div>
+
+									@if($errors->has('dateOutRepair'))
+										<span class="danger">
+												{{$errors->first('dateOutRepair')}}
+											</span>
+									@endif
+								</div>
+								</div>
+
+								<button type="submit" class="btn btn-primary pull-right">Запази</button>
 								<div class="clearfix"></div>
 							</form>
 						</div>
@@ -159,4 +248,25 @@
 	</div>
 </div>
 </div>
+@endsection
+@section('scripts')
+	<script>
+        $('#vehicle_status_id').on('change', function () {
+
+			var code = $(this).find('option:selected').data('code');
+			if(code === 'OnRepair'){
+				$('#OnRepair_cont').removeClass('hiddenfield');
+			}else{
+                $('#OnRepair_cont').addClass('hiddenfield');
+			}
+
+            if(code === 'Free'){
+                $('#OnRepairToFree_cont').removeClass('hiddenfield');
+            }else{
+                $('#OnRepairToFree_cont').addClass('hiddenfield');
+            }
+
+
+        });
+	</script>
 @endsection

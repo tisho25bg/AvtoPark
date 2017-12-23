@@ -13,15 +13,15 @@
             </li>
             <li class="dropdown">
 
-				@if(Auth::user()->hasRole('ADMIN'))
-			<li>
-				<a href="{{route('admin')}}" >
-					<i class="material-icons">reply</i>
-					Admin panel
-				</a>
-			</li>
+            @if(Auth::user()->hasRole('ADMIN'))
+                <li>
+                    <a href="{{route('admin')}}" >
+                        <i class="material-icons">reply</i>
+                        Admin panel
+                    </a>
+                </li>
 			@endif
-            </li>
+
         </ul>
     </div>
 </div>

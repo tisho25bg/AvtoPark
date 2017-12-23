@@ -126,8 +126,8 @@ var routeControl = function (controlOptions) {
                 controlOptions.onRouteSuccess({
                     addressA: leg.start_address,
                     addressB: leg.end_address,
-                    distance: leg.distance,
-                    time: leg.duration.text
+                    distanceInMeters: leg.distance,
+                    timeInSeconds: leg.duration
                 });
 
                 _points[0].setPosition(leg.start_location);
