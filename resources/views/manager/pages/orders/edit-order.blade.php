@@ -1,4 +1,31 @@
 
+Skip to content
+This repository
+
+    Pull requests
+    Issues
+    Marketplace
+    Explore
+
+    @yuzdzhan
+
+2
+0
+
+    0
+
+tisho25bg/AvtoPark
+Code
+Issues 0
+Pull requests 0
+Projects 0
+Wiki
+Insights
+AvtoPark/resources/views/manager/pages/orders/edit-order.blade.php
+d3783ed a minute ago
+@tisho25bg tisho25bg Манджа с грозде2
+351 lines (318 sloc) 24.4 KB
+
 @extends('manager.manager')
 @section('content')
     <div class="content">
@@ -223,7 +250,7 @@
                                     </div>
 
                                         <div class="row">
-                                            <div class="col-md-4">
+                                            <div class="col-md-6">
                                                 <div class="  form-group label-floating {{$errors->has('orderDate') ? 'has-error' : ''}}">
                                                     <label>Дата на изпращане на поръчката</label>
                                                     <input class="date form-control" type="text" name="orderDate" value="{{$order->orderDate}}" id="datepicker">
@@ -234,47 +261,48 @@
                                                         </span>
                                                     @endif
                                                 </div>
-                                                <div class="col-md-5">
-                                                    <div class="  form-group label-floating {{$errors->has('orderEndDate') ? 'has-error' : ''}}">
-                                                        <label>Дата на </label>
-                                                        <input class="date form-control" type="text" name="orderEndDate" value="{{$vehicleReservation->orderEndDate}}" id="orderEndDate">
-                                                        <span class="material-input"></span>
-                                                        @if($errors->has('orderEndDate'))
-                                                            <span class="danger">
-                                                            {{$errors->first('orderEndDate')}}
-                                                        </span>
-                                                        @endif
-                                                    </div>
-                                                </div>
-                                        </div>
-
-                                            <div class="row">
-                                                <div class="col-md-3">
-                                                    <div class="form-group label-floating {{$errors->has('manager_id') ? 'has-error' : ''}}" >
-                                                        <label  class="control-label" for="manager_id">Приел поръчката</label>
-                                                        <input type="text" class="form-control" name="manager" id="manager_id" value="{{Auth::user()->fullName}}" disabled>
-
-                                                        @if($errors->has('manager_id'))
-                                                            <span class="danger">
-                                                        {{$errors->first('manager_id')}}
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="  form-group label-floating {{$errors->has('orderEndDate') ? 'has-error' : ''}}">
+                                                    <label>Дата за пристигане на поръчката </label>
+                                                    <input class="date form-control" type="text" name="orderEndDate" value="{{$vehicleReservation->orderEndDate}}" id="orderEndDate">
+                                                    <span class="material-input"></span>
+                                                    @if($errors->has('orderEndDate'))
+                                                        <span class="danger">
+                                                        {{$errors->first('orderEndDate')}}
                                                     </span>
-                                                        @endif
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-md-3">
-                                                    <div class="form-group label-floating {{$errors->has('customer_id') ? 'has-error' : ''}}" >
-                                                        <label  class="control-label" for="customer_id">Клиент</label>
-                                                        <input type="text" class="form-control" name="customer" id="customer_id" value="{{$order->customer->fullName}}" disabled>
-
-                                                        @if($errors->has('customer_id'))
-                                                            <span class="danger">
-                                                        {{$errors->first('customer_id')}}
-                                                    </span>
-                                                        @endif
-                                                    </div>
+                                                    @endif
                                                 </div>
                                             </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <div class="form-group label-floating {{$errors->has('manager_id') ? 'has-error' : ''}}" >
+                                                    <label  class="control-label" for="manager_id">Приел поръчката</label>
+                                                    <input type="text" class="form-control" name="manager" id="manager_id" value="{{Auth::user()->fullName}}" disabled>
+
+                                                    @if($errors->has('manager_id'))
+                                                        <span class="danger">
+                                                    {{$errors->first('manager_id')}}
+                                                </span>
+                                                    @endif
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-3">
+                                                <div class="form-group label-floating {{$errors->has('customer_id') ? 'has-error' : ''}}" >
+                                                    <label  class="control-label" for="customer_id">Клиент</label>
+                                                    <input type="text" class="form-control" name="customer" id="customer_id" value="{{$order->customer->fullName}}" disabled>
+
+                                                    @if($errors->has('customer_id'))
+                                                        <span class="danger">
+                                                    {{$errors->first('customer_id')}}
+                                                </span>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
 
                                     <input type="hidden" name="orvd" value="{{$order->id}}" />
@@ -295,45 +323,31 @@
         //services
         $('#services').on('change', function(){
             var selected = $(this).find('option:selected');
-
-
             var minWeight = selected.data('minweight');
             var maxWeight = selected.data('maxweight');
-
             var optionIndexes = [];
-
             $('#vehicles option').hide();
-
             $('.dropdown-toggle[data-id="vehicles"]').next('.dropdown-menu').find('li').hide();
-
             $('#vehicles option').each(function(k, i){
-
                 var vehicleMaxWeight = $(this).data('maxweight');
-
                 if(vehicleMaxWeight >= minWeight && vehicleMaxWeight <= maxWeight){
                     $(this).show();
                     optionIndexes.push(k);
                 }
             });
-
             optionIndexes.forEach(function(entry) {
                 $('.dropdown-toggle[data-id="vehicles"]').next('.dropdown-menu').find('li:nth-child('+entry+')').show();
             });
         });
-
-
         $('#vehicles').on('change', function () {
             var selected = $(this).find('option:selected');
             var driveLicenseNeeded = selected.data('drivelicenseneeded');
             var optionIndexes = [];
-
             $('#drivers option').hide();
             $('.dropdown-toggle[data-id="drivers"]').next('.dropdown-menu').find('li').hide();
-
             $('#drivers option').each(function(k, i){
                 var driverLicenseCategory = $(this).data('driverdrivelicense');
                 var vehicleLicenseNeeded = $(this).data('driveLicenseNeeded');
-
                 if(driverLicenseCategory == driveLicenseNeeded){
                     $(this).show();
                     optionIndexes.push(k);
@@ -343,9 +357,22 @@
                 $('.dropdown-toggle[data-id="drivers"]').next('.dropdown-menu').find('li:nth-child('+entry+')').show();
             });
         });
-
         //vehicles
-
         $('#services').change();
     </script>
 @endsection
+
+    © 2018 GitHub, Inc.
+    Terms
+    Privacy
+    Security
+    Status
+    Help
+
+    Contact GitHub
+    API
+    Training
+    Shop
+    Blog
+    About
+
