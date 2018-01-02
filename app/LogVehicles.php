@@ -16,9 +16,9 @@ class LogVehicles extends Model
 
     public function create($vehicleId, $message)
     {
-        $this->vehicle_id = $vehicleId;
-        $this->message = $message;
-        $this->date = \Carbon\Carbon::now();
+        $this->vehicle_id   = $vehicleId;
+        $this->message      = $message;
+        $this->date         = \Carbon\Carbon::now();
 
         $this->save();
     }

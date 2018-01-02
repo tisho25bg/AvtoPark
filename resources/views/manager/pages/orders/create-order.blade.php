@@ -1,10 +1,11 @@
 @extends('manager.manager')
 @section('content')
+
     <div class="content">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-8">
-                    <div class="card">
+                    <div class="card" style="width:880px">
                         <div class="card-header" data-background-color="purple">
                             <h4 class="title">Създаване на поръчка</h4>
                             <p class="category">Форма за създаване на нова поръчка</p>
@@ -14,7 +15,7 @@
                                 {{ csrf_field() }}
 
                                 <div class="row">
-                                        <div class="col-sm-4">
+                                        <div class="col-sm-3">
                                             <div class="form-group label-floating {{$errors->has('services') ? 'has-error' : ''}}">
                                                 <select class="selectpicker" data-style="btn btn-primary btn-round" title="Вид на услугата" data-size="{{count($services) + 1}}" name="services" id="services">
                                                     <option value="">--Без избор--</option>
@@ -34,7 +35,7 @@
                                                 @endif
                                             </div>
                                         </div>
-                                    <div class="col-sm-4">
+                                    <div class="col-sm-3">
                                             <div class="form-group label-floating {{$errors->has('vehicle') ? 'has-error' : ''}}">
                                                 <select class="selectpicker" data-style="btn btn-primary btn-round" title="Налични превозни средства" data-size="{{count($vehicles) + 1}}" name="vehicle" id="vehicles">
                                                     <option value="">--Без избор--</option>
@@ -53,7 +54,7 @@
                                                 @endif
                                             </div>
                                         </div>
-                                        <div class="col-sm-4">
+                                        <div class="col-sm-3">
                                             <div class="form-group label-floating {{$errors->has('driver') ? 'has-error' : ''}}" >
                                                 <select class="selectpicker" data-style="btn btn-primary btn-round" title="Избор на Шофьор" data-size="{{count($drivers) + 1}}" name="driver" id="drivers">
                                                     <option value="">--Без избор--</option>
@@ -68,6 +69,21 @@
                                                 @endif
                                             </div>
                                         </div>
+                                        <div class="col-sm-3">
+                                            <div class="form-group label-floating {{$errors->has('customer_id') ? 'has-error' : ''}}" >
+                                                <select class="selectpicker" data-style="btn btn-primary btn-round" title="Клиент" data-size="{{count($customers) + 1}}" name="customer_id" id="customer_id">
+                                                    <option value="">--Без избор--</option>
+                                                    @foreach($customers as $customer)
+                                                        <option value="{{$customer->id}}" data-customerid="{{$customer->id}}"> {{$customer->fullName}}</option>
+                                                    @endforeach
+                                                </select>
+                                                @if($errors->has('customer_id'))
+                                                    <span class="danger mt5">
+                                                        {{$errors->first('customer_id')}}
+                                                    </span>
+                                                @endif
+                                            </div>
+                                        </div>
 
 
                                 </div>
@@ -76,25 +92,11 @@
                                 <div id="text-holder"></div>
 
                             <div class="row">
-                                <div class="col-sm-4">
-                                    <div class="form-group label-floating {{$errors->has('customer_id') ? 'has-error' : ''}}" >
-                                        <select class="selectpicker" data-style="btn btn-primary btn-round" title="Клиент" data-size="{{count($customers) + 1}}" name="customer_id" id="customer_id">
-                                            <option value="">--Без избор--</option>
-                                            @foreach($customers as $customer)
-                                                <option value="{{$customer->id}}" data-customerid="{{$customer->id}}"> {{$customer->fullName}}</option>
-                                            @endforeach
-                                        </select>
-                                        @if($errors->has('customer_id'))
-                                            <span class="danger mt5">
-                                                    {{$errors->first('customer_id')}}
-                                                </span>
-                                        @endif
-                                    </div>
-                                </div>
+
                             </div>
 
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-md-3">
                                         <div class="form-group label-floating {{$errors->has('addressSending') ? 'has-error' : ''}}" >
                                             <label for="addressSending">Адрес на изпращане</label>
                                             <input type="text"  class="form-control" name="addressSending" id="addressSending" required>
@@ -106,7 +108,7 @@
                                             @endif
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-3">
                                         <div class="form-group label-floating {{$errors->has('addressReceiver') ? 'has-error' : ''}}" >
                                             <label   for="addressReceiver">Адрес на получаване</label>
                                             <input type="text" class="form-control" name="addressReceiver" id="addressReceiver" required>
@@ -118,7 +120,7 @@
                                             @endif
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
                                         <div class="form-group label-floating {{$errors->has('kilometres') ? 'has-error' : ''}}" >
                                             <label for="kilometres">Разстояние в километри</label>
                                             <input type="text" class="form-control" name="kilometres" id="kilometres" value="{{old('kilometres')}}">
@@ -133,8 +135,8 @@
                                     <div class="col-md-3">
                                         <div class="form-group label-floating {{$errors->has('timeToArrive') ? 'has-error' : ''}}" >
 
-                                            <label for="time" > Време в минути</label>
-                                            <input class="form-control" name="time" id="time"  value="{{old('time')}}">
+                                            <label for="time" > Време в часове</label>
+                                            <input class="form-control" type="number" step="0.01"  name="time" id="time"  value="{{old('time')}}">
 
                                             @if($errors->has('timeToArrive'))
                                                 <span class="danger">
@@ -148,7 +150,7 @@
                                     <div class="col-md-3">
                                         <div class="form-group label-floating {{$errors->has('price') ? 'has-error' : ''}}" >
                                             <label for="price">Цена</label>
-                                            <input type="number" step="0.01" class="form-control" name="price" id="price"  >
+                                            <input type="text" step="0.1" class="form-control" name="price" id="price"  >
                                             {{--<script>--}}
                                                 {{--var price = $('#price').data("$orderPrice");--}}
                                                 {{--console.log(price);--}}
@@ -160,6 +162,24 @@
                                             @endif
                                         </div>
                                     </div>
+
+                                    <div class="col-md-3">
+                                        <div class="  form-group label-floating {{$errors->has('orderDate') ? 'has-error' : ''}}">
+                                            <label>Дата на поръчката</label>
+
+                                            <input class="date form-control" type="text" name="orderDate" value="{{old('orderDate')}}" id="datepicker">
+
+                                            <span class="material-input"></span>
+
+                                            @if($errors->has('orderDate'))
+                                                <span class="danger">
+												{{$errors->first('orderDate')}}
+											</span>
+                                            @endif
+
+                                        </div>
+                                    </div>
+
                                     <div class="col-md-3">
                                         <div class="form-group label-floating {{$errors->has('manager_id') ? 'has-error' : ''}}" >
                                             <input type="hidden" class="form-control" name="manager" id="manager_id" value="{{Auth::user()->id}}">
@@ -172,6 +192,8 @@
                                         </div>
                                     </div>
                                 </div>
+
+
                                 <button type="submit" class="btn btn-primary pull-right">Създай поръчка</button>
                             </form>
                         </div>
@@ -184,9 +206,8 @@
     </div>
 @endsection
 @section('scripts')
-    <script>
 
-    </script>
+
     <script>
 //        $(document).ready(function () {
 //
@@ -281,9 +302,6 @@
 
         //drivers
     </script>
-    <script type='text/javascript'>
-
-    </script>
 
     <script type='text/javascript'>
         var onMapLoad = function () {
@@ -305,14 +323,14 @@
                         addressInputA.value = routeData.addressA || "";
                         addressInputB.value = routeData.addressB || "";
                         distanceInput.value = parseInt(routeData.distanceInMeters.value / 1000, 10); // in km
-                        time.value          = parseInt(routeData.timeInSeconds.value / 60, 10); // time in mins
+                        time.value          = parseFloat(routeData.timeInSeconds.value / 60 / 60, 10).toFixed(2); // time in mins
                         price.value         = parseInt(routeData.distanceInMeters.value / 1000, 10) * priceKm;
                         textHolderDomEl.innerHTML = "";
                     },
                     onRouteFail: function () {
                         var html = [
-                            "<p class='error'>Cannot calculate route.</p>",
-                            "<p class='error'>Please select another points.</p>"
+                            "<span class='danger'>Избраният от вас маршут не може да бъде изчислен!</span>",
+                            "<span class='danger'>Моля изберете валиден маршрут.</span>"
                         ].join('');
 
                         addressInputA.value = "";
@@ -330,12 +348,34 @@
             addressInputB.addEventListener('blur', onAddressChange.bind(null, route.pointIndexes.B));
         }
     </script>
+
+    <script>
+        $( function() {
+
+            $( "#datepicker" ).datetimepicker({
+                minDate: 0,
+                minInterval: (1000*60*60),
+                dateFormat: ' yy-mm-dd ',
+
+                timeFormat: 'HH:mm:ss',
+                start: {}, // start picker options
+                end: {} // end picker options
+            });
+        });
+    </script>
     <style>
         #map-holder {
-            height: 200px;
-            width: 400px;
+            height: 320px;
+            width: 750px;
         }
     </style>
+
+
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="/assets/js/jquery-ui-timepicker-addon.min.js" type="text/javascript"></script>
+
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
     <script type="text/javascript" src="{{ URL::asset('assets/js/routeControl.js') }}"></script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?callback=onMapLoad&region=BG&key=AIzaSyDJ8-74q6kLtxWZ5egVzUwVzwSkKQiGvzQ"></script>
 @endsection

@@ -58,7 +58,7 @@
 											<select class="selectpicker" data-style="btn btn-primary btn-round" title="Тип на МПС" data-size="{{count($vehicleTypes) + 1}}" name="vehicle_type" id="vehicle_type">
 												<option value="">--Без избор--</option>
 												@foreach($vehicleTypes as $vehicleType)
-												<option value="{{ $vehicleType->id }}" @if($vehicle->vehicle_types->id == $vehicleType->id) selected=selected @endif>{{ $vehicleType->type }}</option>
+												<option value="{{ $vehicleType->id }}" @if($vehicle->vehicle_types->id == $vehicleType->id) selected=selected @endif>{{ $vehicleType->code }}</option>
 												@endforeach
 											</select>
 										</div>

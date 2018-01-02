@@ -18,6 +18,10 @@
     <link href="/css/material-dashboard.css" rel="stylesheet"/>
 
 
+    <link href="/assets/css/jquery-ui-timepicker-addon.css" rel="stylesheet" />
+
+
+
     <!--     Fonts and icons     -->
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300|Material+Icons' rel='stylesheet' type='text/css'>
@@ -49,6 +53,8 @@
 <script src="/assets/js/jquery.datatables.js" type="text/javascript"></script>
 <script src="/assets/js/jquery.select-bootstrap.js" type="text/javascript"></script>
 <script src="/assets/js/material.min.js" type="text/javascript"></script>
+
+<script src="/assets/js/jquery-ui-timepicker-addon.js" type="text/javascript"></script>
 
 <!-- Material Dashboard javascript methods -->
 <script src="/assets/js/material-dashboard.js"></script>

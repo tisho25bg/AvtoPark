@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class OrderNullableFileds extends Migration
+class CreateOrdersGraphTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,9 @@ class OrderNullableFileds extends Migration
      */
     public function up()
     {
-        Schema::table('orders', function (Blueprint $table)
-        {
-            $table->integer('vehicle_id')->nullable()->change();
-            $table->integer('driver_id')->nullable()->change();
-            $table->integer('manager_id')->nullable()->change();
-
-
+        Schema::create('orders_graph', function (Blueprint $table) {
+            $table->increments('id');
+            $table->timestamps();
         });
     }
 
@@ -30,6 +26,6 @@ class OrderNullableFileds extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('orders_graph');
     }
 }

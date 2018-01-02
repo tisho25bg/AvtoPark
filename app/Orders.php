@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Orders extends Model
 {
@@ -39,6 +40,23 @@ class Orders extends Model
         return $this->hasOne('App\OrderStatus', 'id', 'order_status_id');
     }
 
+    public function vehicleReservation()
+    {
+        return $this->hasOne('App\VehicleReservation', 'id', 'order_id');
+    }
+
+//    protected $dates = [
+//        'orderDate'
+//    ];
+
+//    protected function setOrderDateAttribute($value)
+//    {
+//        $this->attributes['orderDate'] = Carbon::createFromFormat(
+//            $this->getDateFormat('orderDate'), $value
+//        );
+//    }
+
+protected $softDelete = true;
     public function create(\Illuminate\Http\Request $request)
     {
         $this->services_id       = $request->services;
@@ -52,6 +70,7 @@ class Orders extends Model
         $this->customer_id       = $request->customer_id;
         $this->timeToArrive      = $request->time;
         $this->order_status_id   = OrderStatus::where('type', '=', OrderStatus::ORDER_STATUS_PROCESSING)->first()->id;
+        $this->orderDate         = ($request->orderDate);
         $this->save();
     }
     public function createForCustomer(\Illuminate\Http\Request $request)
@@ -64,6 +83,7 @@ class Orders extends Model
         $this->customer_id       = $request->customer_id;
         $this->order_status_id   = OrderStatus::where('type', '=', OrderStatus::ORDER_STATUS_NEW)->first()->id;
         $this->timeToArrive      = $request->time;
+        $this->orderDate         = ($request->orderDate);
         $this->save();
     }
 

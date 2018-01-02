@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class OrderNullableFileds extends Migration
+class AddSoftDeletesToOrders extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,8 @@ class OrderNullableFileds extends Migration
      */
     public function up()
     {
-        Schema::table('orders', function (Blueprint $table)
-        {
-            $table->integer('vehicle_id')->nullable()->change();
-            $table->integer('driver_id')->nullable()->change();
-            $table->integer('manager_id')->nullable()->change();
-
-
+        Schema::table('orders', function ($table){
+            $table->softDeletes();
         });
     }
 

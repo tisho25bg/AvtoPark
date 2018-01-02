@@ -3,7 +3,7 @@
     <div class="logo">
 
         <a href="{{ route('manager') }}" class="simple-text">
-            <span class="logo-text">Менъджер</span>
+            <span class="logo-text">Мениджър</span>
         </a>
 
     </div>

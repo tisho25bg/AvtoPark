@@ -1,5 +1,6 @@
 <?php $customerOrders = Auth::user()->getCustomerNewOrders(); ?>
 <div class="navbar navbar-transparent navbar-absolute">
+
     <div class="container-fluid">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse">
@@ -12,11 +13,12 @@
 
 
 
-
         <div class="collapse navbar-collapse">
 
             <ul class="nav navbar-nav navbar-right">
-                 <li class="dropdown">
+
+
+                <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <i class="material-icons">notifications</i>
                             @if($customerOrders->count() > 0)
@@ -62,65 +64,145 @@
         </div>
     </div>
 </div>
-<script>
-    $(document).ready(function(){
-        $moving_tab = $('<div class="moving-tab"/>');
-        $('.sidebar .nav-container').append($moving_tab);
+{{--<script>--}}
+    {{--var $dOut = $('#date'),--}}
+        {{--$hOut = $('#hours'),--}}
+        {{--$mOut = $('#minutes'),--}}
+        {{--$sOut = $('#seconds'),--}}
+        {{--$ampmOut = $('#ampm');--}}
+    {{--var months = [--}}
+        {{--'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'--}}
+    {{--];--}}
 
-        $this = $('.sidebar .nav').find('li.active a');
-        animationSidebar($this, false);
-        $('div').removeClass('.moving-tab');
-        if (window.history && window.history.pushState) {
+    {{--var days = [--}}
+        {{--'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'--}}
+    {{--];--}}
 
-            // console.log('sunt in window.history');
-            $(window).on('popstate', function() {
+    {{--function update(){--}}
+        {{--var date = new Date();--}}
 
-                // console.log('am apasat pe back, locatia noua: ', window.location.pathname);
+        {{--var ampm = date.getHours() < 12--}}
+            {{--? 'AM'--}}
+            {{--: 'PM';--}}
 
-                setTimeout(function(){
-                    // console.log('incep animatia cu 1ms delay');
-                    $this = $('.sidebar .nav').find('li.active a');
-                    animationSidebar($this,true);
-                },1);
+        {{--var hours = date.getHours() == 0--}}
+            {{--? 12--}}
+            {{--: date.getHours() > 12--}}
+                {{--? date.getHours() - 12--}}
+                {{--: date.getHours();--}}
 
-            });
+        {{--var minutes = date.getMinutes() < 10--}}
+            {{--? '0' + date.getMinutes()--}}
+            {{--: date.getMinutes();--}}
 
-        }
-    });
-    $(window).resize(function(){
-        $this = $('.sidebar .nav').find('li.active a');
-        animationSidebar($this,true);
+        {{--var seconds = date.getSeconds() < 10--}}
+            {{--? '0' + date.getSeconds()--}}
+            {{--: date.getSeconds();--}}
 
-    });
-    $('.sidebar .nav > li > a').click(function(){
-        $this = $(this);
-        animationSidebar($this, true);
-    });
+        {{--var dayOfWeek = days[date.getDay()];--}}
+        {{--var month = months[date.getMonth()];--}}
+        {{--var day = date.getDate();--}}
+        {{--var year = date.getFullYear();--}}
 
-    function animationSidebar($this, animate){
-        // console.log('incep animatia si butonul pe care sunt acum este:', $this[0].href );
-        if(!$this.parent('li').position())
-            return;
+        {{--var dateString = dayOfWeek + ', ' + month + ' ' + day + ', ' + year;--}}
 
-        $current_li_distance = $this.parent('li').position().top - 10;
+        {{--$dOut.text(dateString);--}}
+        {{--$hOut.text(hours);--}}
+        {{--$mOut.text(minutes);--}}
+        {{--$sOut.text(seconds);--}}
+        {{--$ampmOut.text(ampm);--}}
+    {{--}--}}
 
-        button_text = $this.html();
+    {{--update();--}}
+    {{--window.setInterval(update, 1000);--}}
+{{--</script>--}}
 
-        $(".moving-tab").css("width", 230 + "px");
+{{--<script>--}}
+    {{--var clock = new Vue({--}}
+        {{--el: '#clock',--}}
+        {{--data: {--}}
+            {{--time: '',--}}
+            {{--date: ''--}}
+        {{--}--}}
+    {{--});--}}
 
-        if(animate){
-            $('.moving-tab').css({
-                'transform':'translate3d(0,' + $current_li_distance + 'px, 0)',
-                'transition': 'all 0.5s cubic-bezier(0.29, 1.42, 0.79, 1)'
-            });
-        }else{
-            $('.moving-tab').css({
-                'transform':'translate3d(0,' + $current_li_distance + 'px, 0)'
-            });
-        }
+    {{--var week = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];--}}
+    {{--var timerID = setInterval(updateTime, 1000);--}}
+    {{--updateTime();--}}
+    {{--function updateTime() {--}}
+        {{--var cd = new Date();--}}
+        {{--clock.time = zeroPadding(cd.getHours(), 2) + ':' + zeroPadding(cd.getMinutes(), 2) + ':' + zeroPadding(cd.getSeconds(), 2);--}}
+        {{--clock.date = zeroPadding(cd.getFullYear(), 4) + '-' + zeroPadding(cd.getMonth()+1, 2) + '-' + zeroPadding(cd.getDate(), 2) + ' ' + week[cd.getDay()];--}}
+    {{--};--}}
 
-        setTimeout(function(){
-            $('.moving-tab').html(button_text);
-        }, 100);
-    }
-</script>
+    {{--function zeroPadding(num, digit) {--}}
+        {{--var zero = '';--}}
+        {{--for(var i = 0; i < digit; i++) {--}}
+            {{--zero += '0';--}}
+        {{--}--}}
+        {{--return (zero + num).slice(-digit);--}}
+    {{--}--}}
+{{--</script>--}}
+
+{{--<script>--}}
+    {{--$(document).ready(function(){--}}
+        {{--$moving_tab = $('<div class="moving-tab"/>');--}}
+        {{--$('.sidebar .nav-container').append($moving_tab);--}}
+
+        {{--$this = $('.sidebar .nav').find('li.active a');--}}
+        {{--animationSidebar($this, false);--}}
+        {{--$('div').removeClass('.moving-tab');--}}
+        {{--if (window.history && window.history.pushState) {--}}
+
+            {{--// console.log('sunt in window.history');--}}
+            {{--$(window).on('popstate', function() {--}}
+
+                {{--// console.log('am apasat pe back, locatia noua: ', window.location.pathname);--}}
+
+                {{--setTimeout(function(){--}}
+                    {{--// console.log('incep animatia cu 1ms delay');--}}
+                    {{--$this = $('.sidebar .nav').find('li.active a');--}}
+                    {{--animationSidebar($this,true);--}}
+                {{--},1);--}}
+
+            {{--});--}}
+
+        {{--}--}}
+    {{--});--}}
+    {{--$(window).resize(function(){--}}
+        {{--$this = $('.sidebar .nav').find('li.active a');--}}
+        {{--animationSidebar($this,true);--}}
+
+    {{--});--}}
+    {{--$('.sidebar .nav > li > a').click(function(){--}}
+        {{--$this = $(this);--}}
+        {{--animationSidebar($this, true);--}}
+    {{--});--}}
+
+    {{--function animationSidebar($this, animate){--}}
+        {{--// console.log('incep animatia si butonul pe care sunt acum este:', $this[0].href );--}}
+        {{--if(!$this.parent('li').position())--}}
+            {{--return;--}}
+
+        {{--$current_li_distance = $this.parent('li').position().top - 10;--}}
+
+        {{--button_text = $this.html();--}}
+
+        {{--$(".moving-tab").css("width", 230 + "px");--}}
+
+        {{--if(animate){--}}
+            {{--$('.moving-tab').css({--}}
+                {{--'transform':'translate3d(0,' + $current_li_distance + 'px, 0)',--}}
+                {{--'transition': 'all 0.5s cubic-bezier(0.29, 1.42, 0.79, 1)'--}}
+            {{--});--}}
+        {{--}else{--}}
+            {{--$('.moving-tab').css({--}}
+                {{--'transform':'translate3d(0,' + $current_li_distance + 'px, 0)'--}}
+            {{--});--}}
+        {{--}--}}
+
+        {{--setTimeout(function(){--}}
+            {{--$('.moving-tab').html(button_text);--}}
+        {{--}, 100);--}}
+    {{--}--}}
+{{--</script>--}}

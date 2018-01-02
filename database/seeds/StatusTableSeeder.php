@@ -15,17 +15,27 @@ class StatusTableSeeder extends Seeder
     {
         Status::create([
             'id'    => 1,
-            'type'  => 'Free'
+            'type'  => 'Free',
+            'code'  => 'Свободен',
         ]);
 
         Status::create([
             'id'    => 2,
-            'type'  => 'OnRoad'
+            'type'  => 'OnRoad',
+            'code'  => 'На път',
+
         ]);
 
         Status::create([
             'id'    => 3,
-            'type'  => 'OnRepair'
+            'type'  => 'OnRepair',
+            'code'  => 'В ремонт'
+        ]);
+
+        Status::create([
+            'id'    => 4,
+            'type'  => 'Reserved',
+            'code'  => 'Резервиран'
         ]);
     }
 }

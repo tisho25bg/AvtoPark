@@ -12,6 +12,7 @@ use App\Http\Requests\VehicleFormRequest;
 use App\Orders;
 use App\Status;
 use App\Role;
+use App\VehicleReservation;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\OrdersFormRequest;
@@ -250,11 +251,11 @@ class ManagerController extends Controller
             ->where('roles.code', '=', Role::ROLE_DRIVER)
             ->get(['users.*']);
 
-        $services = \App\Services::get();
-        $vehicles  = \App\Vehicles::get();
-        $managers  = \App\User::get();
-        $orderStatus = \App\OrderStatus::get();
-
+        $services           = \App\Services::get();
+        $vehicles           = \App\Vehicles::get();
+        $managers           = \App\User::get();
+        $orderStatus        = \App\OrderStatus::get();
+        $vehicleReservation = \App\VehicleReservation::get();
         $customers = User::whereHas('role', function ($query) {
             $query->where('code', '=', Role::ROLE_CUSTOMER);
         })->get();
@@ -276,28 +277,46 @@ class ManagerController extends Controller
             ->with('managers', $managers)
             ->with('customers', $customers)
             ->with('orderStatus', $orderStatus)
-            ->with('freeVehicles', $freeVehicles);
+            ->with('freeVehicles', $freeVehicles)
+            ->with('vehicleReservation', $vehicleReservation);
     }
 
     public function storeOrder( OrdersFormRequest $request)
     {
         $order = new Orders();
         $order->create($request);
-
+        $vehicleReservation = new VehicleReservation();
 //        $orderPrice     = json_decode($order->calculatePriceOfOrder($order->id));
 //
 //        $order->price   = $orderPrice;
 //
 //        $order->save();
       //  dd($orderPrice, $order->id);
-        $vehicleID      = $order->vehicle_id;
-
-        $vehicle = Vehicles::find($vehicleID);
-        $vehicle->vehicle_status_id = 2;
-
-        $vehicle->mileage += $order->kilometres;
+        $vehicleID                      = $order->vehicle_id;
+        $vehicle                        = Vehicles::find($vehicleID);
+        $vehicle->vehicle_status_id     = 4;
+        $vehicle->mileage              += $order->kilometres;
         $vehicle->save();
+
+        $vehicleReservation->order_id   = $order->id;
+        $timeTest                       = $order->orderDate;
+        $carbon_date                    = Carbon::parse($timeTest);
+        $carbon_date2                   = $carbon_date->addHours($order->timeToArrive );
+        //2018-01-09 17:00:00.000000
+        /*Добавям времето за пристигане, което е 440 минути :
+            и се получава :
+        2018-01-09 22:00:00.000000
+            2018-01-23 22:00:00.000000
+         * */
+        //2018-01-16 21:43:00.000000
+
+        $vehicleReservation->orderStartDate = Carbon::parse($order->orderDate);
+        $vehicleReservation->orderEndDate   = $vehicleReservation->orderStartDate->addHour($order->timeToArrive);
+        $vehicleReservation->create($request);
+//dd($vehicleReservation->orderEndDate);
+        //dd($timeTest, $carbon_date, $carbon_date2, $order->timeToArrive );
 //dd($orderPrice);
+
         $request->session()->flash('alert-success', 'Успешно добавихте Поръчка!');
 
         return redirect()->route('show-orders');
@@ -311,7 +330,23 @@ class ManagerController extends Controller
         $services = \App\Services::get();
         $vehicles  = \App\Vehicles::get();
         $managers  = \App\User::get();
+        $vehicleReservation =  \App\VehicleReservation::get();
+        $vehicleReservation->order_id   = $order->id;
+        $timeTest                       = $order->orderDate;
+        $carbon_date                    = Carbon::parse($timeTest);
+        $carbon_date2                   = $carbon_date->addHours($order->timeToArrive );
+        //2018-01-09 17:00:00.000000
+        /*Добавям времето за пристигане, което е 440 минути :
+            и се получава :
+        2018-01-09 22:00:00.000000
+            2018-01-23 22:00:00.000000
+         * */
+        //2018-01-16 21:43:00.000000
 
+        $vehicleReservation->orderStartDate = Carbon::parse($order->orderDate);
+        $vehicleReservation->orderEndDate   = $vehicleReservation->orderStartDate->addHour($order->timeToArrive);
+//        $vehicleReservation->save();
+     //   dd($vehicleReservation);
         $customers  = User::whereHas('role', function ($query) {
             $query->where('code', '=', Role::ROLE_CUSTOMER);
         })->get();
@@ -331,13 +366,13 @@ class ManagerController extends Controller
             ->with('drivers', $drivers)
             ->with('managers', $managers)
             ->with('customers', $customers)
-            ->with('freeVehicles', $freeVehicles);
+            ->with('freeVehicles', $freeVehicles)
+            ->with('vehicleReservation', $vehicleReservation);
     }
 
-    public function saveOrder($id, OrdersFormRequest $request)
+    public function saveOrder($id, Request $request)
     {
         $order      = Orders::find($id);
-
 
         //dd($vehicleId, $order, $vehicle);
         foreach ($order->getAttributes() as $k=>$v)
@@ -356,12 +391,11 @@ class ManagerController extends Controller
             $order->order_status_id = OrderStatus::where('type', '=', OrderStatus::ORDER_STATUS_PROCESSING)->first()->id;
 
         }
+
         $order->save();
 
-        $vehicleId  = $order->vehicle_id;
-        $vehicle    = Vehicles::find($vehicleId);
-        $vehicle->vehicle_status_id = 2;
-        $vehicle->save();
+
+
         $request->session()->flash('alert-success', 'Успешно редактирахте поръчка!');
         return redirect()->route('edit-order', ['id' => $id]);
     }

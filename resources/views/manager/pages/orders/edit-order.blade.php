@@ -5,7 +5,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-8">
-                    <div class="card">
+                    <div class="card" style="width: 750px;">
                         <div class="card-header" data-background-color="purple">
                             <h4 class="title">Редактиране на поръчка</h4>
                             <p class="category">Форма за редактиране на съществуваща поръчка</p>
@@ -17,9 +17,9 @@
                                     <div class="row">
                                         <div class="col-sm-4">
                                             <div class="form-group label-floating" >
-                                            <label  class="control-label" for="service">Услуга</label>
-                                            <input type="text" class="form-control" name="service" id="service" value="{{$order->services->name}}" disabled>
-                                        </div>
+                                                <label  class="control-label" for="service">Услуга</label>
+                                                <input type="text" class="form-control" name="service" id="service" value="{{$order->services->name}}" disabled>
+                                             </div>
                                         </div>
                                         <div class="col-sm-4">
                                             <div class="form-group label-floating" >
@@ -35,26 +35,54 @@
                                         {{--</div>--}}
                                     </div>
                                     <div class="row">
-                                        <div class="col-md-6">
+                                        <div class="col-md-3">
                                             <div class="form-group label-floating" >
-                                            <label  class="control-label" for="addressSending">Адрес на изпращане</label>
-                                            <input type="text" step="0.01" class="form-control" name="addressSending" id="addressSending" value="{{$order->addressSending}}" disabled>
-                                        </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group label-floating" >
-                                            <label  class="control-label" for="addressReceiver">Адрес на получаване</label>
-                                            <input type="text" class="form-control" name="addressReceiver" id="addressReceiver" value="{{$order->addressReceiver}}" disabled>
+                                                <label  class="control-label" for="addressSending">Адрес на изпращане</label>
+                                                <input type="text" step="0.01" class="form-control" name="addressSending" id="addressSending" value="{{$order->addressSending}}" disabled>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <div class="form-group label-floating" >
+                                                <label  class="control-label" for="addressReceiver">Адрес на получаване</label>
+                                                <input type="text" class="form-control" name="addressReceiver" id="addressReceiver" value="{{$order->addressReceiver}}" disabled>
+                                            </div>
+                                        </div>
                                         <div class="col-md-3">
                                             <div class="form-group label-floating" >
                                                 <label  class="control-label" for="kilometres">Разстояние в километри</label>
                                                 <input type="number" class="form-control" name="kilometres" id="kilometres" value="{{$order->kilometres}}" disabled>
                                             </div>
                                         </div>
+                                    </div>
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <div class="  form-group label-floating {{$errors->has('orderEndDate') ? 'has-error' : ''}}">
+                                                    <label>Дата на получаване на поръчката</label>
+                                                    <input class="date form-control" type="text" name="orderEndDate" value="{{$vehicleReservation->orderEndDate}}" id="orderEndDate">
+                                                    <span class="material-input"></span>
+                                                    @if($errors->has('orderEndDate'))
+                                                        <span class="danger">
+                                                                {{$errors->first('orderEndDate')}}
+                                                            </span>
+                                                    @endif
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="  form-group label-floating {{$errors->has('orderEndDate') ? 'has-error' : ''}}">
+                                                        <label>Дата на получаване на поръчката</label>
+                                                        <input class="date form-control" type="text" name="orderEndDate" value="{{$vehicleReservation->orderEndDate}}" id="orderEndDate">
+                                                        <span class="material-input"></span>
+                                                        @if($errors->has('orderEndDate'))
+                                                            <span class="danger">
+                                                            {{$errors->first('orderEndDate')}}
+                                                        </span>
+                                                        @endif
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <div class="row">
+
                                         <div class="col-md-3">
                                             <div class="form-group label-floating">
                                                 <label  class="control-label" for="price">Цена</label>
@@ -144,7 +172,7 @@
                                     </div>
 
                                     <div class="row">
-                                        <div class="col-md-6">
+                                        <div class="col-md-3">
                                             <div class="form-group label-floating {{$errors->has('addressSending') ? 'has-error' : ''}}" >
                                                 <label  class="control-label" for="addressSending">Адрес на изпращане</label>
                                                 <input type="text" step="0.01" class="form-control" name="addressSending" id="addressSending" value="{{$order->addressSending}}">
@@ -156,7 +184,7 @@
                                                 @endif
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
+                                        <div class="col-md-3">
                                             <div class="form-group label-floating {{$errors->has('addressReceiver') ? 'has-error' : ''}}" >
                                                 <label  class="control-label" for="addressReceiver">Адрес на получаване</label>
                                                 <input type="text" class="form-control" name="addressReceiver" id="addressReceiver" value="{{$order->addressReceiver}}">
@@ -168,15 +196,15 @@
                                                 @endif
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
+                                        <div class="col-md-3">
                                             <div class="form-group label-floating {{$errors->has('kilometres') ? 'has-error' : ''}}" >
                                                 <label  class="control-label" for="kilometres">Разстояние в километри</label>
                                                 <input type="number" class="form-control" name="kilometres" id="kilometres" value="{{$order->kilometres}}">
 
                                                 @if($errors->has('kilometres'))
                                                     <span class="danger">
-                                                {{$errors->first('kilometres')}}
-                                            </span>
+                                                        {{$errors->first('kilometres')}}
+                                                    </span>
                                                 @endif
                                             </div>
                                         </div>
@@ -187,37 +215,66 @@
 
                                                 @if($errors->has('price'))
                                                     <span class="danger">
-                                                {{$errors->first('price')}}
-                                            </span>
+                                                        {{$errors->first('price')}}
+                                                    </span>
                                                 @endif
                                             </div>
                                         </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group label-floating {{$errors->has('manager_id') ? 'has-error' : ''}}" >
-                                                <label  class="control-label" for="manager_id">Приел поръчката</label>
-                                                <input type="text" class="form-control" name="manager" id="manager_id" value="{{Auth::user()->fullName}}" disabled>
+                                    </div>
 
-                                                @if($errors->has('manager_id'))
-                                                    <span class="danger">
-                                                {{$errors->first('manager_id')}}
-                                            </span>
-                                                @endif
-                                            </div>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="  form-group label-floating {{$errors->has('orderDate') ? 'has-error' : ''}}">
+                                                    <label>Дата на изпращане на поръчката</label>
+                                                    <input class="date form-control" type="text" name="orderDate" value="{{$order->orderDate}}" id="datepicker">
+                                                    <span class="material-input"></span>
+                                                    @if($errors->has('orderDate'))
+                                                        <span class="danger">
+                                                            {{$errors->first('orderDate')}}
+                                                        </span>
+                                                    @endif
+                                                </div>
+                                                <div class="col-md-5">
+                                                    <div class="  form-group label-floating {{$errors->has('orderEndDate') ? 'has-error' : ''}}">
+                                                        <label>Дата на </label>
+                                                        <input class="date form-control" type="text" name="orderEndDate" value="{{$vehicleReservation->orderEndDate}}" id="orderEndDate">
+                                                        <span class="material-input"></span>
+                                                        @if($errors->has('orderEndDate'))
+                                                            <span class="danger">
+                                                            {{$errors->first('orderEndDate')}}
+                                                        </span>
+                                                        @endif
+                                                    </div>
+                                                </div>
                                         </div>
 
-                                        <div class="col-md-3">
-                                            <div class="form-group label-floating {{$errors->has('customer_id') ? 'has-error' : ''}}" >
-                                                <label  class="control-label" for="customer_id">Клиент</label>
-                                                <input type="text" class="form-control" name="customer" id="customer_id" value="{{$order->customer->fullName}}" disabled>
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <div class="form-group label-floating {{$errors->has('manager_id') ? 'has-error' : ''}}" >
+                                                        <label  class="control-label" for="manager_id">Приел поръчката</label>
+                                                        <input type="text" class="form-control" name="manager" id="manager_id" value="{{Auth::user()->fullName}}" disabled>
 
-                                                @if($errors->has('customer_id'))
-                                                    <span class="danger">
-                                                {{$errors->first('customer_id')}}
-                                            </span>
-                                                @endif
+                                                        @if($errors->has('manager_id'))
+                                                            <span class="danger">
+                                                        {{$errors->first('manager_id')}}
+                                                    </span>
+                                                        @endif
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-3">
+                                                    <div class="form-group label-floating {{$errors->has('customer_id') ? 'has-error' : ''}}" >
+                                                        <label  class="control-label" for="customer_id">Клиент</label>
+                                                        <input type="text" class="form-control" name="customer" id="customer_id" value="{{$order->customer->fullName}}" disabled>
+
+                                                        @if($errors->has('customer_id'))
+                                                            <span class="danger">
+                                                        {{$errors->first('customer_id')}}
+                                                    </span>
+                                                        @endif
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
-
                                     </div>
 
                                     <input type="hidden" name="orvd" value="{{$order->id}}" />

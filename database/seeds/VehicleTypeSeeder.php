@@ -15,16 +15,19 @@ class VehicleTypeSeeder extends Seeder
         Vehicle_types::create([
             'id'    =>  1,
             'type'  => 'Car',
+            'code'  => 'Кола',
         ]);
 
         Vehicle_types::create([
             'id'    =>  2,
             'type'  => 'Bus',
+            'code'  => 'Бус',
         ]);
 
         Vehicle_types::create([
             'id'    =>  3,
             'type'  => 'Truck',
+            'code'  => 'Камион',
         ]);
     }
 }
