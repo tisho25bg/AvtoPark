@@ -1,31 +1,3 @@
-
-Skip to content
-This repository
-
-    Pull requests
-    Issues
-    Marketplace
-    Explore
-
-    @yuzdzhan
-
-2
-0
-
-    0
-
-tisho25bg/AvtoPark
-Code
-Issues 0
-Pull requests 0
-Projects 0
-Wiki
-Insights
-AvtoPark/resources/views/manager/pages/orders/edit-order.blade.php
-d3783ed a minute ago
-@tisho25bg tisho25bg Манджа с грозде2
-351 lines (318 sloc) 24.4 KB
-
 @extends('manager.manager')
 @section('content')
     <div class="content">
@@ -361,18 +333,3 @@ d3783ed a minute ago
         $('#services').change();
     </script>
 @endsection
-
-    © 2018 GitHub, Inc.
-    Terms
-    Privacy
-    Security
-    Status
-    Help
-
-    Contact GitHub
-    API
-    Training
-    Shop
-    Blog
-    About
-
